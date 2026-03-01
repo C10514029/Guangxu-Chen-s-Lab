@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guangxu Chen's Lab — SCUT</title>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --crimson: #8B1A1A;
+    --crimson-dark: #5c0f0f;
+    --crimson-light: #b52a2a;
+    --gold: #c9a84c;
+    --gold-light: #e8d5a3;
+    --bg: #faf9f7;
+    --text: #1a1a1a;
+    --text-muted: #666;
+    --border: #e8e0d0;
+    --nav-h: 52px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Source Sans 3', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+  .site-header { background: linear-gradient(135deg, var(--crimson-dark) 0%, var(--crimson) 55%, #a83232 100%); padding: 22px 40px 18px; position: relative; overflow: hidden; }
+  .site-header::after { content: ''; position: absolute; top: -60px; right: -60px; width: 220px; height: 220px; border-radius: 50%; background: rgba(255,255,255,0.04); }
+  .site-header h1 { font-family: 'EB Garamond', serif; font-size: 1.9rem; font-weight: 700; color: #fff; letter-spacing: 0.02em; position: relative; }
+  .site-header p { font-size: 0.82rem; color: rgba(255,255,255,0.72); margin-top: 3px; letter-spacing: 0.05em; text-transform: uppercase; }
+
+  .nav-wrap { background: #fff; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+  nav { display: flex; gap: 2px; padding: 0 32px; overflow-x: auto; scrollbar-width: none; }
+  nav::-webkit-scrollbar { display: none; }
+  nav a { display: flex; align-items: center; gap: 5px; padding: 0 14px; height: var(--nav-h); font-size: 0.88rem; font-weight: 500; color: var(--text-muted); text-decoration: none; white-space: nowrap; border-bottom: 3px solid transparent; transition: color 0.2s, border-color 0.2s; cursor: pointer; }
+  nav a:hover { color: var(--crimson); }
+  nav a.active { color: var(--crimson); border-bottom-color: var(--crimson); font-weight: 600; }
+
+  .page { display: none; animation: fadeIn 0.3s ease; }
+  .page.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+  .container { max-width: 1080px; margin: 0 auto; padding: 48px 40px; }
+  .section-title { font-family: 'EB Garamond', serif; font-size: 1.7rem; color: var(--crimson-dark); margin-bottom: 6px; }
+  .section-divider { width: 48px; height: 3px; background: var(--gold); margin-bottom: 32px; border-radius: 2px; }
+
+  /* HOME */
+  .home-hero { display: grid; grid-template-columns: 1fr 290px; gap: 48px; align-items: start; margin-bottom: 48px; }
+  .home-hero h2 { font-family: 'EB Garamond', serif; font-size: 2rem; line-height: 1.3; color: var(--crimson-dark); margin-bottom: 16px; }
+  .home-hero p { font-size: 0.95rem; line-height: 1.85; color: #444; margin-bottom: 12px; }
+  .research-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+  .tag { background: #f5ede3; color: var(--crimson); font-size: 0.74rem; font-weight: 600; padding: 5px 12px; border-radius: 20px; letter-spacing: 0.03em; text-transform: uppercase; }
+  .pi-card { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 28px 24px; text-align: center; box-shadow: 0 4px 20px rgba(139,26,26,0.08); }
+  .pi-avatar { width: 96px; height: 96px; border-radius: 50%; background: linear-gradient(135deg, var(--crimson), var(--gold)); margin: 0 auto 14px; display: flex; align-items: center; justify-content: center; font-family: 'EB Garamond', serif; font-size: 2rem; color: #fff; font-weight: 700; }
+  .pi-card h3 { font-family: 'EB Garamond', serif; font-size: 1.15rem; margin-bottom: 6px; }
+  .pi-card p { font-size: 0.8rem; color: var(--text-muted); line-height: 1.6; }
+  .pi-card .email { margin-top: 10px; font-size: 0.78rem; color: var(--crimson); }
+
+  .stats-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; margin-bottom: 48px; }
+  .stat-box { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 20px 16px; text-align: center; }
+  .stat-box .num { font-family: 'EB Garamond', serif; font-size: 1.8rem; color: var(--crimson); font-weight: 700; }
+  .stat-box .lbl { font-size: 0.74rem; color: var(--text-muted); margin-top: 4px; }
+
+  .news-section h3 { font-family: 'EB Garamond', serif; font-size: 1.3rem; color: var(--crimson-dark); margin-bottom: 16px; }
+  .news-list { list-style: none; }
+  .news-list li { display: flex; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--border); align-items: start; }
+  .news-date { font-size: 0.75rem; color: var(--text-muted); min-width: 64px; padding-top: 2px; }
+  .news-text { font-size: 0.9rem; line-height: 1.6; }
+  .badge { display: inline-block; background: var(--crimson); color: #fff; font-size: 0.65rem; padding: 2px 7px; border-radius: 10px; text-transform: uppercase; letter-spacing: 0.05em; margin-right: 6px; vertical-align: middle; }
+
+  /* PI */
+  .pi-bio-grid { display: grid; grid-template-columns: 220px 1fr; gap: 48px; align-items: start; margin-bottom: 48px; }
+  .pi-photo-card { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 28px 20px; text-align: center; }
+  .pi-photo-large { width: 120px; height: 120px; border-radius: 50%; background: linear-gradient(135deg, var(--crimson), var(--gold)); margin: 0 auto 16px; display: flex; align-items: center; justify-content: center; font-family: 'EB Garamond', serif; font-size: 2.4rem; color: #fff; font-weight: 700; }
+  .pi-photo-card h2 { font-family: 'EB Garamond', serif; font-size: 1.2rem; margin-bottom: 4px; }
+  .pi-photo-card p { font-size: 0.78rem; color: var(--text-muted); line-height: 1.6; }
+  .bio-text p { font-size: 0.93rem; line-height: 1.85; color: #444; margin-bottom: 14px; }
+  .exp-section { margin-top: 28px; }
+  .exp-section h3 { font-family: 'EB Garamond', serif; font-size: 1.15rem; color: var(--crimson-dark); margin-bottom: 14px; }
+  .exp-item { display: flex; gap: 16px; margin-bottom: 12px; }
+  .exp-year { font-size: 0.78rem; color: var(--crimson); min-width: 140px; padding-top: 2px; font-weight: 600; }
+  .exp-desc { font-size: 0.88rem; line-height: 1.65; color: #444; }
+
+  /* PEOPLE */
+  .people-section-title { font-family: 'EB Garamond', serif; font-size: 1.1rem; color: var(--crimson); border-bottom: 1px solid var(--border); padding-bottom: 8px; margin: 32px 0 20px; }
+  .people-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 18px; }
+  .person-card { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 22px 14px; text-align: center; }
+  .person-avatar { width: 68px; height: 68px; border-radius: 50%; background: linear-gradient(135deg, #e8d5a3, var(--crimson-light)); margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; font-family: 'EB Garamond', serif; font-size: 1.3rem; color: #fff; font-weight: 700; }
+  .person-card h4 { font-size: 0.92rem; font-weight: 600; margin-bottom: 4px; }
+  .person-card p { font-size: 0.76rem; color: var(--text-muted); }
+
+  /* RESEARCH */
+  .research-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px,1fr)); gap: 24px; }
+  .research-card { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 26px 22px; transition: box-shadow 0.2s, transform 0.2s; position: relative; overflow: hidden; }
+  .research-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--crimson); }
+  .research-card:hover { box-shadow: 0 8px 28px rgba(139,26,26,0.1); transform: translateY(-3px); }
+  .research-card .rc-icon { font-size: 1.8rem; margin-bottom: 10px; }
+  .research-card h3 { font-family: 'EB Garamond', serif; font-size: 1.1rem; margin-bottom: 8px; color: var(--crimson-dark); }
+  .research-card p { font-size: 0.87rem; line-height: 1.7; color: #555; }
+
+  /* PROJECTS */
+  .proj-category { font-family: 'EB Garamond', serif; font-size: 1.15rem; color: var(--crimson); border-bottom: 1px solid var(--border); padding-bottom: 8px; margin: 32px 0 14px; }
+  .proj-item { background: #fff; border: 1px solid var(--border); border-left: 4px solid var(--gold); border-radius: 8px; padding: 14px 20px; margin-bottom: 10px; font-size: 0.88rem; line-height: 1.7; color: #444; }
+  .proj-item .proj-year { font-weight: 700; color: var(--crimson-dark); }
+  .proj-status { display: inline-block; font-size: 0.68rem; padding: 1px 8px; border-radius: 10px; margin-left: 8px; font-weight: 600; }
+  .ongoing { background: #e8f5e8; color: #2a7a2a; }
+  .done { background: #f0f0f0; color: #888; }
+
+  /* PUBLICATIONS */
+  .pub-filter { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 28px; }
+  .filter-btn { padding: 6px 16px; border: 1px solid var(--border); border-radius: 20px; font-size: 0.82rem; cursor: pointer; background: #fff; color: var(--text-muted); transition: all 0.2s; }
+  .filter-btn.active, .filter-btn:hover { background: var(--crimson); color: #fff; border-color: var(--crimson); }
+  .pub-year-group { margin-bottom: 36px; }
+  .pub-year-header { font-family: 'EB Garamond', serif; font-size: 1.3rem; color: var(--crimson-dark); border-bottom: 2px solid var(--gold); padding-bottom: 8px; margin-bottom: 14px; }
+  .pub-item { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 16px 20px; margin-bottom: 10px; transition: box-shadow 0.2s; }
+  .pub-item:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.07); }
+  .pub-title { font-weight: 600; font-size: 0.91rem; margin-bottom: 5px; line-height: 1.5; }
+  .pub-authors { font-size: 0.79rem; color: var(--text-muted); margin-bottom: 4px; line-height: 1.5; }
+  .pub-journal { font-size: 0.81rem; color: var(--crimson); font-style: italic; }
+  .pub-link { font-size: 0.74rem; color: #999; margin-left: 8px; font-style: normal; text-decoration: none; }
+  .pub-link:hover { color: var(--crimson); }
+  .pub-badge { display: inline-block; background: var(--crimson); color: #fff; font-size: 0.62rem; padding: 1px 7px; border-radius: 8px; margin-left: 6px; font-weight: 600; font-style: normal; vertical-align: middle; }
+
+  /* TEACHING / CONTENT */
+  .content-block { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 26px 30px; margin-bottom: 18px; line-height: 1.8; font-size: 0.92rem; color: #444; }
+  .content-block h3 { font-family: 'EB Garamond', serif; font-size: 1.15rem; color: var(--crimson-dark); margin-bottom: 10px; }
+
+  /* OPENINGS */
+  .opening-card { background: #fff; border: 1px solid var(--border); border-left: 4px solid var(--gold); border-radius: 8px; padding: 24px 28px; margin-bottom: 20px; }
+  .opening-card h3 { font-family: 'EB Garamond', serif; font-size: 1.2rem; color: var(--crimson-dark); margin-bottom: 10px; }
+  .opening-card p { font-size: 0.9rem; line-height: 1.75; color: #555; margin-bottom: 8px; }
+  .opening-card ul { margin: 8px 0 0 18px; font-size: 0.88rem; line-height: 1.9; color: #555; }
+  .salary-table { width: 100%; border-collapse: collapse; margin-top: 14px; font-size: 0.87rem; }
+  .salary-table th { background: var(--crimson); color: #fff; padding: 9px 16px; text-align: left; font-weight: 600; }
+  .salary-table td { padding: 9px 16px; border-bottom: 1px solid var(--border); }
+  .salary-table tr:last-child td { border-bottom: none; }
+  .salary-table tr:nth-child(even) td { background: #faf5ef; }
+
+  /* CONTACT */
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+  .contact-info h3 { font-family: 'EB Garamond', serif; font-size: 1.2rem; margin-bottom: 20px; color: var(--crimson-dark); }
+  .contact-row { display: flex; gap: 14px; margin-bottom: 18px; align-items: start; }
+  .contact-icon { font-size: 1rem; margin-top: 2px; color: var(--crimson); min-width: 20px; }
+  .contact-row p { font-size: 0.9rem; line-height: 1.7; color: #444; }
+  .map-box { background: linear-gradient(135deg, #f5ede3, #e8d5a3); border-radius: 10px; height: 280px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; border: 1px solid var(--border); color: var(--text-muted); font-size: 0.88rem; }
+
+  footer { background: var(--crimson-dark); color: rgba(255,255,255,0.6); text-align: center; padding: 24px; font-size: 0.8rem; margin-top: 60px; }
+  footer strong { color: rgba(255,255,255,0.9); }
+
+  @media (max-width: 760px) {
+    .container { padding: 28px 18px; }
+    .home-hero, .pi-bio-grid, .contact-grid { grid-template-columns: 1fr; }
+    .stats-row { grid-template-columns: repeat(2,1fr); }
+    .site-header { padding: 16px 18px; }
+    nav { padding: 0 10px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="site-header">
+  <h1>Guangxu Chen's Lab</h1>
+  <p>South China University of Technology · Electro/Thermocatalysis · Nanomaterials · Energy & Environment</p>
+</div>
+
+<div class="nav-wrap">
+  <nav>
+    <a class="active" onclick="showPage('home',this)">⌂ Home</a>
+    <a onclick="showPage('pi',this)">👤 People</a>
+    <a onclick="showPage('research',this)">🔬 Research</a>
+    <a onclick="showPage('projects',this)">📁 Projects</a>
+    <a onclick="showPage('publications',this)">📄 Publications</a>
+    <a onclick="showPage('teaching',this)">🎓 Teaching</a>
+    <a onclick="showPage('lablife',this)">🧪 Lab Life</a>
+    <a onclick="showPage('openings',this)">📢 Openings</a>
+    <a onclick="showPage('news',this)">📰 News</a>
+    <a onclick="showPage('contact',this)">✉ Contact</a>
+  </nav>
+</div>
+
+<!-- HOME -->
+<div id="page-home" class="page active">
+  <div class="container">
+    <div class="home-hero">
+      <div>
+        <h2>Welcome to Guangxu Chen's Research Group</h2>
+        <p>We are a materials chemistry research group at <strong>South China University of Technology (华南理工大学)</strong>, dedicated to the fundamental study of precise and efficient conversion of small molecules related to energy and environmental applications.</p>
+        <p>Our research combines controlled nanomaterial synthesis, advanced structural characterization, and mechanistic studies to develop next-generation electro- and thermocatalysts for sustainable chemistry.</p>
+        <div class="research-tags">
+          <span class="tag">Electrocatalysis</span>
+          <span class="tag">Thermocatalysis</span>
+          <span class="tag">CO₂ Reduction</span>
+          <span class="tag">Nanomaterials</span>
+          <span class="tag">Single-Atom Catalysis</span>
+          <span class="tag">Biomass Valorization</span>
+          <span class="tag">Environmental Catalysis</span>
+          <span class="tag">Plastic Upcycling</span>
+        </div>
+      </div>
+      <div>
+        <div class="pi-card">
+          <div class="pi-avatar">GC</div>
+          <h3>Prof. Guangxu Chen</h3>
+          <p>Professor & Ph.D. Advisor<br>School of Environment and Energy<br>South China University of Technology</p>
+          <p style="margin-top:6px">国家海外高层次青年人才<br>珠江人才计划</p>
+          <p class="email">cgx08@scut.edu.cn</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-box"><div class="num">60+</div><div class="lbl">SCI Publications</div></div>
+      <div class="stat-box"><div class="num">15,000+</div><div class="lbl">Citations (Google Scholar)</div></div>
+      <div class="stat-box"><div class="num">49</div><div class="lbl">H-index</div></div>
+      <div class="stat-box"><div class="num">13</div><div class="lbl">ESI Highly Cited Papers</div></div>
+    </div>
+
+    <div class="news-section">
+      <h3>Latest News</h3>
+      <ul class="news-list">
+        <li><span class="news-date">2026</span><span class="news-text"><span class="badge">Paper</span>Electrochemical oxygen removal work published in <em>Chem. Commun.</em></span></li>
+        <li><span class="news-date">2025</span><span class="news-text"><span class="badge">Paper</span>CO₂ electroreduction for urban wastewater denitrification published in <em>Nature Water</em>.</span></li>
+        <li><span class="news-date">2025</span><span class="news-text"><span class="badge">Paper</span>Integrated CO₂ reduction & separation system published in <em>Nature Communications</em>.</span></li>
+        <li><span class="news-date">2025</span><span class="news-text"><span class="badge">Paper</span>Autonomous robotic nanoparticle synthesis platform published in <em>Nature Communications</em>.</span></li>
+        <li><span class="news-date">2025</span><span class="news-text"><span class="badge">Paper</span>Low-voltage benzyl alcohol electrooxidation via PtZn-ZnO<sub>x</sub> interface published in <em>JACS</em>.</span></li>
+        <li><span class="news-date">2024</span><span class="news-text"><span class="badge">Grant</span>科技部重点研发计划课题立项（循环经济），245万元，2025–2028。</span></li>
+        <li><span class="news-date">2024</span><span class="news-text"><span class="badge">Grant</span>国家自然科学基金面上项目获批，50万元，2025–2028。</span></li>
+        <li><span class="news-date">2024</span><span class="news-text"><span class="badge">Paper</span>Enhanced biomass oxidation by Ni²⁺-O-Pd interfaces published in <em>Nature Communications</em>.</span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- PEOPLE -->
+<div id="page-pi" class="page">
+  <div class="container">
+    <div class="section-title">People</div>
+    <div class="section-divider"></div>
+
+    <div class="pi-bio-grid">
+      <div>
+        <div class="pi-photo-card">
+          <div class="pi-photo-large">GC</div>
+          <h2>Prof. Guangxu Chen</h2>
+          <p style="font-size:0.8rem;color:var(--crimson);font-weight:600;margin:4px 0 8px">陈光需</p>
+          <p>Professor & Ph.D. Advisor<br>School of Environment and Energy<br>South China University of Technology</p>
+          <p style="margin-top:10px;font-size:0.76rem">国家海外高层次青年人才<br>珠江人才计划青年拔尖人才</p>
+          <p style="margin-top:10px;font-size:0.76rem;color:var(--crimson)">cgx08@scut.edu.cn</p>
+        </div>
+      </div>
+      <div class="bio-text">
+        <p>Dr. Guangxu Chen is a Professor and Ph.D. advisor at South China University of Technology and a recipient of the <strong>National Overseas Young Talent Program (国家海外高层次青年人才, 2018)</strong>. He earned his Ph.D. under the supervision of Academician Prof. Nanfeng Zheng at Xiamen University and conducted postdoctoral research with Academician Prof. Yi Cui at Stanford University.</p>
+        <p>His research focuses on the fundamental study of <strong>precise and efficient conversion of small molecules</strong> related to energy and environmental applications, including the controlled synthesis of functional nanomaterials, structural characterization, electro-/thermocatalytic performance, reaction mechanisms, and the design and development of catalytic reaction systems.</p>
+        <p>He has led multiple research projects including the National Overseas Young Talent Program, a key project under the Ministry of Science and Technology's Key R&D Program on Circular Economy, two NSFC general projects, a Ministry of Science and Technology foreign expert project, and two Guangdong "Pearl River Talent Plan" projects.</p>
+        <p>He has published over <strong>60 SCI papers</strong> in journals including <em>Science</em>, <em>Nature Materials</em>, <em>Nature Catalysis</em>, <em>Nature Water</em>, <em>Nature Communications</em> (4), <em>JACS</em>, <em>ACS Catalysis</em> (2), <em>Nano Letters</em> (2), <em>ACS Nano</em> (5), and others. His work has received over <strong>15,000 citations</strong>, with 13 ESI Highly Cited Papers and an <strong>H-index of 49</strong>.</p>
+        <p>He was awarded the <strong>2018 National Natural Science Award (Second Prize)</strong> — "Coordination Chemistry of Metal Nanomaterials" (R4). He has applied for 25 patents (10 granted) and 1 PCT patent, with 2 technology transfers completed.</p>
+
+        <div class="exp-section">
+          <h3>Work Experience</h3>
+          <div class="exp-item"><span class="exp-year">09/2019 – Present</span><span class="exp-desc">Professor, School of Environment and Energy, South China University of Technology</span></div>
+          <div class="exp-item"><span class="exp-year">09/2015 – 06/2019</span><span class="exp-desc">Postdoctoral Researcher, Department of Materials Science and Engineering, Stanford University (Advisor: Prof. Yi Cui)</span></div>
+          <div class="exp-item"><span class="exp-year">09/2014 – 09/2015</span><span class="exp-desc">Postdoctoral Researcher, Collaborative Innovation Center of Energy Materials Chemistry, Xiamen University (Advisor: Prof. Nanfeng Zheng)</span></div>
+        </div>
+        <div class="exp-section">
+          <h3>Education</h3>
+          <div class="exp-item"><span class="exp-year">09/2009 – 07/2014</span><span class="exp-desc">Ph.D. in Chemistry, Xiamen University (Advisor: Prof. Nanfeng Zheng)</span></div>
+          <div class="exp-item"><span class="exp-year">09/2005 – 07/2009</span><span class="exp-desc">B.S. in Chemistry, Anhui University (Advisor: Prof. Jieying Wu)</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="people-section-title">Postdoctoral Researchers</div>
+    <div class="people-grid">
+      <div class="person-card"><div class="person-avatar">?</div><h4>To be updated</h4><p>Postdoctoral Fellow</p></div>
+    </div>
+    <div class="people-section-title">Ph.D. Students</div>
+    <div class="people-grid">
+      <div class="person-card"><div class="person-avatar">?</div><h4>To be updated</h4><p>Ph.D. Student</p></div>
+    </div>
+    <div class="people-section-title">Master's Students</div>
+    <div class="people-grid">
+      <div class="person-card"><div class="person-avatar">?</div><h4>To be updated</h4><p>Master's Student</p></div>
+    </div>
+    <p style="font-size:0.82rem;color:var(--text-muted);margin-top:24px">* Please update team member information as needed.</p>
+  </div>
+</div>
+
+<!-- RESEARCH -->
+<div id="page-research" class="page">
+  <div class="container">
+    <div class="section-title">Research</div>
+    <div class="section-divider"></div>
+    <p style="font-size:0.95rem;line-height:1.85;color:#555;margin-bottom:40px;max-width:820px">We focus on the fundamental study of precise and efficient conversion of energy- and environment-related small molecules (CO₂, N₂, H₂O, organic compounds, plastics). We combine controlled nanomaterial synthesis, advanced in-situ characterization, and mechanistic studies to develop next-generation catalysts.</p>
+    <div class="research-grid">
+      <div class="research-card"><div class="rc-icon">⚡</div><h3>Electrocatalytic CO₂ Reduction</h3><p>Design of Cu-based and single-atom catalysts for selective CO₂ electroreduction to C2+ products. Integration with wastewater denitrification and CO₂ capture/separation systems.</p></div>
+      <div class="research-card"><div class="rc-icon">🌿</div><h3>Biomass Electrooxidation</h3><p>Low-voltage electrooxidation of biomass-derived compounds (HMF, benzyl alcohol, glycerol) using Pd, Pt, Ni, and metal oxide interfaces for sustainable chemical production.</p></div>
+      <div class="research-card"><div class="rc-icon">🔵</div><h3>Single-Atom & Cluster Catalysis</h3><p>Precision synthesis of single-atom catalysts and sub-nanometer clusters for thermocatalytic reactions including propane dehydrogenation, CO oxidation, and water-gas shift.</p></div>
+      <div class="research-card"><div class="rc-icon">♻️</div><h3>Plastic Upcycling</h3><p>Catalytic conversion of polyethylene, polystyrene, and PET waste into valuable chemicals via thermal and electrochemical approaches. Supported by MOST Key R&D Program on Circular Economy.</p></div>
+      <div class="research-card"><div class="rc-icon">🌍</div><h3>Environmental Catalysis</h3><p>Development of catalysts for VOC oxidation, photocatalytic air/water purification. Photothermal synergy, quenching-induced defect engineering, and perovskite photocatalysts.</p></div>
+      <div class="research-card"><div class="rc-icon">🤖</div><h3>AI + Automated Synthesis</h3><p>Development of autonomous robotic platforms and AI-assisted approaches for end-to-end nanoparticle synthesis, high-throughput characterization, and intelligent catalyst screening.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- PROJECTS -->
+<div id="page-projects" class="page">
+  <div class="container">
+    <div class="section-title">Projects</div>
+    <div class="section-divider"></div>
+
+    <div class="proj-category">🏆 国家级项目 · National Projects</div>
+    <div class="proj-item"><span class="proj-year">2024</span> 科技部重点研发计划"循环经济关键技术与装备"重点专项 (2024YFC3908700)<span class="proj-status ongoing">在研</span><br>芯片生产过程与废弃液晶化学品环境风险防控技术研发与应用示范，课题负责人，<strong>245万元</strong>，2025/01–2028/12</div>
+    <div class="proj-item"><span class="proj-year">2024</span> 国家自然科学基金面上项目 (22471077)<span class="proj-status ongoing">在研</span><br>电催化CO₂高效转化：从催化剂的可控制备到污水脱氮除磷应用，<strong>50万元</strong>，2025/01–2028/12</div>
+    <div class="proj-item"><span class="proj-year">2020</span> 科技部外专项目 (G20200019024)<span class="proj-status done">结题</span><br>功能纳米材料在可再生能源与环境的应用研究，21万元</div>
+    <div class="proj-item"><span class="proj-year">2019</span> 国家自然科学基金面上项目 (21971070)<span class="proj-status done">结题</span><br>配位小分子调控铜基纳米材料的表界面结构及电催化选择性，<strong>60万元</strong>，2020/01–2024/12</div>
+    <div class="proj-item"><span class="proj-year">2018</span> 国家"海外高层次引进人才"青年项目<span class="proj-status done">结题</span>，<strong>300万元</strong></div>
+
+    <div class="proj-category">🏛️ 省部级项目 · Provincial Projects</div>
+    <div class="proj-item"><span class="proj-year">2024</span> 广东省自然科学基金面上项目 (2025A1515010458)<span class="proj-status ongoing">在研</span><br>负载型铂团簇催化剂的设计合成及其界面催化氧化研究，10万元，2025/01–2026/12</div>
+    <div class="proj-item"><span class="proj-year">2022</span> 广东省自然科学基金面上项目 (2022A1515012047)<span class="proj-status done">结题</span><br>亚单层(氢)氧化物-金属纳米模型催化剂的精准构筑及其在水煤气反应中的界面效应研究，10万元</div>
+    <div class="proj-item"><span class="proj-year">2021</span> 广州市重点研发计划 (202103040002)<span class="proj-status ongoing">在研</span><br>基于金属双极板的高性能质子交换膜燃料电池电堆开发和验证，50万/1000万，2021/04–2024/03</div>
+    <div class="proj-item"><span class="proj-year">2020</span> 广东省重点研发 (2020B010188002)<span class="proj-status done">结题</span><br>烷烃脱氢单原子催化剂的制备及其工程应用示范，25万/1600万，2020/01–2022/12</div>
+    <div class="proj-item"><span class="proj-year">2020</span> 珠海市香洲区"香山创业英才"项目<span class="proj-status done">结题</span>，400万元，2020/01–2025/12</div>
+    <div class="proj-item"><span class="proj-year">2019</span> "珠江人才计划"引进创新创业团队 (2019ZT08L075)<span class="proj-status ongoing">在研</span>，210万/1000万，2020/05–2025/05</div>
+    <div class="proj-item"><span class="proj-year">2019</span> "珠江人才计划"青年拔尖项目 (2019QN01L159)<span class="proj-status ongoing">在研</span>，<strong>250万元</strong>，2020/05–2025/05</div>
+
+    <div class="proj-category">🏫 校级项目 · University Projects</div>
+    <div class="proj-item"><span class="proj-year">2019–</span> 华南理工大学"兴华学者"人才计划</div>
+  </div>
+</div>
+
+<!-- PUBLICATIONS -->
+<div id="page-publications" class="page">
+  <div class="container">
+    <div class="section-title">Publications</div>
+    <div class="section-divider"></div>
+    <p style="font-size:0.84rem;color:var(--text-muted);margin-bottom:22px">* Corresponding author &nbsp;·&nbsp; + Co-first author &nbsp;·&nbsp; Papers since 2021 (selected)</p>
+    <div class="pub-filter">
+      <button class="filter-btn active" onclick="filterPubs('all',this)">All</button>
+      <button class="filter-btn" onclick="filterPubs('2026',this)">2026</button>
+      <button class="filter-btn" onclick="filterPubs('2025',this)">2025</button>
+      <button class="filter-btn" onclick="filterPubs('2024',this)">2024</button>
+      <button class="filter-btn" onclick="filterPubs('2023',this)">2023</button>
+      <button class="filter-btn" onclick="filterPubs('2022',this)">2022</button>
+      <button class="filter-btn" onclick="filterPubs('2021',this)">2021</button>
+      <button class="filter-btn" onclick="filterPubs('2020',this)">2020</button>
+      <button class="filter-btn" onclick="filterPubs('2014',this)">2014 (Selected)</button>
+    </div>
+
+    <div class="pub-year-group" data-year="2026">
+      <div class="pub-year-header">2026</div>
+      <div class="pub-item">
+        <div class="pub-title">Heteropoly acid-mediated electrochemically efficient removal of oxygen</div>
+        <div class="pub-authors">Sun P.<sup>+</sup>, Wang P.<sup>+</sup>, Chen Z.<sup>+</sup>, Pei A., Wu Q., Zhang G., Ji S., Liu D., Qin H., <strong>Chen G.*</strong></div>
+        <div class="pub-journal">Chem. Commun., 2026 <a class="pub-link" href="https://doi.org/10.1039/D5CC06553D" target="_blank">DOI →</a></div>
+      </div>
+    </div>
+
+    <div class="pub-year-group" data-year="2025">
+      <div class="pub-year-header">2025</div>
+
+      <div class="pub-item">
+        <div class="pub-title">Realizing the practical application of CO₂ electroreduction for urban wastewater denitrification <span class="pub-badge">Nature Water</span></div>
+        <div class="pub-authors">Wu Q.<sup>+</sup>, Ji S.<sup>+</sup>, Chen J.<sup>+</sup>, Tan X.-Q., Ong W.-J., Du R., Wang P., Wang H., Qiu Y., Yan K., Zhao Y., Zhao W.-W.*, Peng K.-S., Chen Y.-Y., Hung S.-F.*, Zhou L., Wang X., Qiu G.*, <strong>Chen G.*</strong></div>
+        <div class="pub-journal">Nature Water, 2025, 3, 1291–1302 <a class="pub-link" href="https://doi.org/10.1038/s44221-025-00516-6" target="_blank">DOI →</a></div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">Integrated system for electrolyte recovery, product separation, and CO₂ capture in CO₂ reduction <span class="pub-badge">Nat. Commun.</span></div>
+        <div class="pub-authors">Wang P.<sup>+</sup>, Pei A.<sup>+</sup>, Chen Z.<sup>+</sup>, Sun P., Hu C., Wang X., Zheng N.*, <strong>Chen G.*</strong></div>
+        <div class="pub-journal">Nature Communications, 2025, 16, 731 <a class="pub-link" href="https://doi.org/10.1038/s41467-025-56111-6" target="_blank">DOI →</a></div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">A chemical autonomous robotic platform for end-to-end synthesis of nanoparticles <span class="pub-badge">Nat. Commun.</span></div>
+        <div class="pub-authors">Gao F.<sup>+</sup>, Li H.<sup>+</sup>, Chen Z.<sup>+</sup>, Yi Y., Nie S., Cheng Z., Liu Z.*, Liu S., Guo Y., Qin Q., Li Z., Zhang L., Hu H., Li C., Yang L., Wang Y., <strong>Chen G.*</strong></div>
+        <div class="pub-journal">Nature Communications, 2025, 16, 7558 <a class="pub-link" href="https://doi.org/10.1038/s41467-025-62994-2" target="_blank">DOI →</a></div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">Low-Voltage Electrooxidation of Benzyl Alcohol to Benzoic Acid Enhanced by PtZn-ZnO<sub>x</sub> Interface <span class="pub-badge">JACS</span></div>
+        <div class="pub-authors">Liu R.<sup>+</sup>, Tu W.<sup>+</sup>, Pei A.*, Huang W.-H., Jia Y.*, Wang P., Liu D., Wu Q., Qin Q., Zhou W., Zhou L., Yan K., Zhao Y.*, <strong>Chen G.*</strong></div>
+        <div class="pub-journal">J. Am. Chem. Soc., 2025, 147, 12, 10339–10348 <a class="pub-link" href="https://doi.org/10.1021/jacs.4c17193" target="_blank">DOI →</a></div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">Enhanced electrocatalytic biomass oxidation at low voltage by Ni²⁺-O-Pd interfaces <span class="pub-badge">Nat. Commun.</span></div>
+        <div class="pub-authors">Pei A.<sup>+</sup>, Wang P.<sup>+</sup>, Zhang S., Zhang Q., Jiang X., Chen Z., Zhou W., Qin Q., Liu R., Du R., Li Z., Qiu Y., Yan K., Gu L.*, Ye J., Waterhouse G.I.N., Huang W.-H., Chen C.-L., Zhao Y.*, <strong>Chen G.*</strong></div>
+        <div class="pub-journal">Nature Communications, 2024, 15, 5899 <a class="pub-link" href="https://doi.org/10.1038/s41467-024-50325-w" target="_blank">DOI →</a></div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">Two-Dimensional Submonolayer Pt Clusters with Optimal Pt⁰–Ptᵟ⁺ Sites for Efficient Methylcyclohexane Dehydrogenation</div>
+        <div class="pub-authors">Li Z.<sup>+</sup>, Wang M.<sup>+</sup>, Yang H.<sup>+</sup>, Jia Y.*, Liu S., Yang S., Chen M., Wang P., Dai S., Zhou L., Zhao Y.*, <strong>Chen G.*</strong></div>
+        <div class="pub-journal">ACS Nano, 2025, ASAP <a class="pub-link" href="https://doi.org/10.1021/acsnano.5c12158" target="_blank">DOI →</a></div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">LiCoO₂-Derived Ni-Doped Catalysts for Electrochemical Upcycling of PET Waste to Formic Acid</div>
+        <div class="pub-authors">Chen Z.<sup>+</sup>, Zhang G.<sup>+</sup>, Yang H.<sup>+</sup>, Zhao Y., Pei A., Wang P., Yang J., Zhang J., Sun P., Qin H., Zhan J., Peng J., Huang W.-H., Zhou L., <strong>Chen G.*</strong></div>
+        <div class="pub-journal">ACS Nano, 2025, 19, 29, 26572–26582 <a class="pub-link" href="https://doi.org/10.1021/acsnano.5c05213" target="_blank">DOI →</a></div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">Selective Biomass Valorization in Neutral Electrolyte by Lowering the O₂ Activation Energy via Tandem Catalysis</div>
+        <div class="pub-authors">Zheng Y., Wu Q., Wang H., Wang P., Huang W.-H., Zhao Y., <strong>Chen G.*</strong></div>
+        <div class="pub-journal">ACS Catalysis, 2025, 15, 18155–18166 <a class="pub-link" href="https://doi.org/10.1021/acscatal.5c05599" target="_blank">DOI →</a></div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">Copper-Optimized Active Sites in Cobalt Oxide Nanocubes for Selective Electrooxidation of 5-Hydroxymethylfurfural</div>
+        <div class="pub-authors">Zhang J., Pei A., Yang H., Zhou W., Feng Z., Tian H., Zhao Y.*, <strong>Chen G.*</strong>, Peng J.*</div>
+        <div class="pub-journal">ACS Catalysis, 2025, 15(6), 4596–4604 <a class="pub-link" href="https://doi.org/10.1021/acscatal.5c00647" target="_blank">DOI →</a></div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">Transforming polystyrene wastes into aromatic products near ambient temperature with aluminium chloride</div>
+        <div class="pub-authors">Tian S.<sup>+</sup>, Dai J.<sup>+</sup>, Li Z., Wu Q., <strong>Chen G.*</strong></div>
+        <div class="pub-journal">Green Chemistry, 2025, 27, 7908–7917 <a class="pub-link" href="https://doi.org/10.1039/D5GC02420" target="_blank">DOI →</a></div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">Fine regulation of Ru species improved the polyethylene hydrogenolysis performance over Ru/Al₂O₃ catalyst</div>
+        <div class="pub-authors">Dai J., Fang Z., Yang H., Li Z., Wang M., Tian S., Liu S., Jia Y., Chen M., Zhao Y., <strong>Chen G.*</strong></div>
+        <div class="pub-journal">Nano Research, 2025 <a class="pub-link" href="https://doi.org/10.26599/NR.2025.94908162" target="_blank">DOI →</a></div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">Li₂ZrF₆-based electrolytes for durable lithium metal batteries <span class="pub-badge">Nature</span></div>
+        <div class="pub-authors">Xu Q., Li T., Ju Z., <strong>Chen G.</strong>, Ye D., Waterhouse G.I.N., Lu Y., Lai X., Zhou G., Guo L.*, Yan K.*, Tao X.*, Li H.*, Qiu Y.</div>
+        <div class="pub-journal">Nature, 2025, 637, 339–346 <a class="pub-link" href="https://doi.org/10.1038/s41586-024-08294-z" target="_blank">DOI →</a></div>
+      </div>
+    </div>
+
+    <div class="pub-year-group" data-year="2024">
+      <div class="pub-year-header">2024</div>
+
+      <div class="pub-item">
+        <div class="pub-title">Pt–ZnO<sub>x</sub> Interfacial Effect on the Performance of Propane Dehydrogenation and Mechanism Study</div>
+        <div class="pub-authors">Liu D., Jiang F., Zhang Q., Huang W.-H., Zheng Y., Chen M., Wu L., Qin R., Wang M., Zhang S., Chen L., Yan K., Zhou L., Zhao Y.*, Gu L.*, <strong>Chen G.*</strong></div>
+        <div class="pub-journal">ACS Nano, 2024, 18, 51, 34671–34682 <a class="pub-link" href="https://doi.org/10.1021/acsnano.4c10030" target="_blank">DOI →</a></div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">Unveiling the Gold Facet Effect in Selective Oxidation of 5-Hydroxymethylfurfural and Hydrogen Production</div>
+        <div class="pub-authors">Qin Q., Li T.*, Sun X., Pei A., Jia Y., He H., Gao F., Wang P., Wu Q., Liu R., Dai S., Lin H., Zhang Q., Zhao Y., <strong>Chen G.*</strong></div>
+        <div class="pub-journal">Nano Letters, 2024, 24, 51, 16351–16359 <a class="pub-link" href="https://doi.org/10.1021/acs.nanolett.4c04786" target="_blank">DOI →</a></div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">Modulating Adsorption–Redox Sites of Cs₃Bi₂Br₉₋ₓ@AgBr Core–Shell Heterostructure for Selective Toluene Photooxidation</div>
+        <div class="pub-authors">Zhou B., Fan K., Chong Y., Xu S., Wei J., Wei J., Sergeev A.A., Wong K.S., Li T.*, <strong>Chen G.*</strong>, Ye D.*, Yan K.*</div>
+        <div class="pub-journal">ACS Energy Letters, 2024, 9, 4, 1743–1752 <a class="pub-link" href="https://doi.org/10.1021/acsenergylett.4c00484" target="_blank">DOI →</a></div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">Multistep Quenching of a Rust-Derived Catalyst for Enhanced VOC Catalytic Oxidation</div>
+        <div class="pub-authors">Chong Y., Chen T., Zhou B., Li Y., Huang W.-H., Chen C.-L., Wei J., Yan K., Qiu Y.*, <strong>Chen G.*</strong>, Ye D.</div>
+        <div class="pub-journal">ACS Catalysis, 2024, 14, 9, 7201–7212 <a class="pub-link" href="https://doi.org/10.1021/acscatal.4c01425" target="_blank">DOI →</a></div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">Efficient photothermal catalytic oxidation enabled by three-dimensional nanochannel substrates</div>
+        <div class="pub-authors">Li Y., Zhang Q., Chong Y., Huang W.-H., Chen C.-L., Jin X., <strong>Chen G.*</strong>, Fan Z.*, Qiu Y.*, Ye D.</div>
+        <div class="pub-journal">Environmental Science & Technology, 2024, 58, 11, 5153–5161 <a class="pub-link" href="https://doi.org/10.1021/acs.est.3c09077" target="_blank">DOI →</a></div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">Heterostructured metal oxides realized by quenching-induced structural transformation</div>
+        <div class="pub-authors">Ye C., Pan Z., Zhang Q., Yin F., Wang Y., Li Y., <strong>Chen G.</strong>, Li J., Qiu Y.*, Waterhouse G.I.N., Gu L.*, Lin Z., Guo L.*</div>
+        <div class="pub-journal">Energy & Environmental Science, 2024, 17, 332–343 <a class="pub-link" href="https://doi.org/10.1039/D3EE03379A" target="_blank">DOI →</a></div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">Hydrogen Spillover Induced PtCo/CoO<sub>x</sub> Interfaces for Enhanced CO Oxidation at Low Temperatures in Humid Conditions</div>
+        <div class="pub-authors">Lin J., Zhao S., Yang J., Huang W.-H., Chen C.-L., Chen T., Zhao Y., <strong>Chen G.*</strong>, Qiu Y.*, Gu L.</div>
+        <div class="pub-journal">Small, 2024, 20, 2309181 <a class="pub-link" href="https://doi.org/10.1002/smll.202309181" target="_blank">DOI →</a></div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">CuCl₂/FeCl₃ Bimetallic Photocatalyst for Sustainable Ethylene Production from Ethanol via Recoverable Redox Cycles</div>
+        <div class="pub-authors">Xu S., Li M., Zhou B., Duan C., Zou F., Zou S., Long X., <strong>Chen G.*</strong>, Yan K.*</div>
+        <div class="pub-journal">J. Phys. Chem. Lett., 2024, 15, 17, 4640–4646 <a class="pub-link" href="https://doi.org/10.1021/acs.jpclett.4c00588" target="_blank">DOI →</a></div>
+      </div>
+    </div>
+
+    <div class="pub-year-group" data-year="2023">
+      <div class="pub-year-header">2023</div>
+
+      <div class="pub-item">
+        <div class="pub-title">Solar-driven efficient heterogeneous subminute water disinfection nanosystem assembled with fingerprint MoS₂ <span class="pub-badge">Nature Water</span></div>
+        <div class="pub-authors">Wu T., Liu B., Liu C., Wan J., Yang A., Liu K., Shi F., Zhao J., Lu Z., <strong>Chen G.</strong>, Pei A., Hwang H.Y., Cui Y.*</div>
+        <div class="pub-journal">Nature Water, 2023, 1(5), 462–470</div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">Toward more efficient carbon-based electrocatalysts for H₂O₂ synthesis: roles of cobalt and carbon defects in two-electron ORR</div>
+        <div class="pub-authors">Zheng Y., Wang P., Huang W.-H., Chen C.-L., Jia Y., Dai S., Li T., Zhao Y., Qiu Y., Waterhouse G.I.N., <strong>Chen G.*</strong></div>
+        <div class="pub-journal">Nano Letters, 2023, 23, 3, 1100–1108 <a class="pub-link" href="https://doi.org/10.1021/acs.nanolett.2c04901" target="_blank">DOI →</a></div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">Nanograin-Boundary-Abundant Cu₂O-Cu Nanocubes with High C2+ Selectivity during Electrochemical CO₂ Reduction at 500 mA/cm²</div>
+        <div class="pub-authors">Wu Q., Du R., Wang P., Waterhouse G.I.N., Li J., Qiu Y., Yan K., Zhao Y., Zhao W.-W., Tsai H.-J., Chen M.-C., Hung S.-F.*, Wang X.*, <strong>Chen G.*</strong></div>
+        <div class="pub-journal">ACS Nano, 2023, 17, 13, 12884–12894 <a class="pub-link" href="https://doi.org/10.1021/acsnano.3c04951" target="_blank">DOI →</a></div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">Quenching-induced defect-rich platinum/metal oxide catalysts promote catalytic oxidation</div>
+        <div class="pub-authors">Chong Y., Chen T., Li Y., Lin J., Huang W.-H., Chen C.-L., Jin X., Fu M., Zhao Y., <strong>Chen G.*</strong>, Wei J.*, Qiu Y.*, Waterhouse G.I.N., Ye D., Lin Z., Guo L.</div>
+        <div class="pub-journal">Environmental Science & Technology, 2023, 57, 14, 5831–5840 <a class="pub-link" href="https://doi.org/10.1021/acs.est.2c09795" target="_blank">DOI →</a></div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">Cu-C(O) Interfaces Deliver Remarkable Selectivity for CO₂ Reduction to C2+ Products at 500 mA/cm²</div>
+        <div class="pub-authors">Du R., Wu Q., Zhang S., Wang P., Li Z., Qiu Y., Yan K., Waterhouse G.I.N., Wang P., Li J., Zhao Y.*, Zhao W.-W.*, Wang X.*, <strong>Chen G.*</strong></div>
+        <div class="pub-journal">Small, 2023, 19, 28, 2301289 <a class="pub-link" href="https://doi.org/10.1002/smll.202301289" target="_blank">DOI →</a></div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">CeO₂/Cu₂O/Cu Tandem Interfaces for Efficient Water–Gas Shift Reaction Catalysis</div>
+        <div class="pub-authors">Li Z., Wang M., Jia Y., Du R., Li T., Zheng Y., Chen M., Qiu Y., Yan K., Zhao W.-W., Wang P., Waterhouse G.I.N., Dai S.*, Zhao Y.*, <strong>Chen G.*</strong></div>
+        <div class="pub-journal">ACS Applied Materials & Interfaces, 2023, 15, 26, 31584–31594 <a class="pub-link" href="https://doi.org/10.1021/acsami.3c06386" target="_blank">DOI →</a></div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">Atomic-Interface Effect of Single-Atom Ru/CoO<sub>x</sub> for Selective Electrooxidation of 5-Hydroxymethylfurfural</div>
+        <div class="pub-authors">Gu W., Pei A.*, Zhang S., Jiang F., Jia Y.*, Qin Q., Du R., Li Z., Liu R., Qiu Y., Yan K., Zhao Y., Liang C.*, <strong>Chen G.*</strong></div>
+        <div class="pub-journal">ACS Applied Materials & Interfaces, 2023, 15, 23, 28036–28043 <a class="pub-link" href="https://doi.org/10.1021/acsami.3c03430" target="_blank">DOI →</a></div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">Hydride-doped Ag₁₇Cu₁₀ nanoclusters as high-performance electrocatalysts for CO₂ reduction</div>
+        <div class="pub-authors">Sun X., Wang P., Yan X., Guo H., Wang L., Xu Q., Yan B., Li S., He J.*, <strong>Chen G.*</strong>, Shen H.*, Zheng N.</div>
+        <div class="pub-journal">iScience, 2023, 26, 10, 107850</div>
+      </div>
+    </div>
+
+    <div class="pub-year-group" data-year="2022">
+      <div class="pub-year-header">2022</div>
+
+      <div class="pub-item">
+        <div class="pub-title">Molecular Assembled Electrocatalyst for Highly Selective CO₂ Fixation to C2+ Products</div>
+        <div class="pub-authors">Wang P., Li T., Wu Q., Du R., Zhang Q., Huang W.-H., Chen C.-L., Fan Y., Chen H., Jia Y., Dai S., Qiu Y., Yan K., Meng Y., Waterhouse G.I.N., Gu L.*, Zhao Y.*, Zhao W.-W.*, <strong>Chen G.*</strong></div>
+        <div class="pub-journal">ACS Nano, 2022, 16, 10, 17021–17032 <a class="pub-link" href="https://doi.org/10.1021/acsnano.2c07138" target="_blank">DOI →</a></div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">In Situ Engineering of the Cu⁺/Cu⁰ Interface to Boost C2+ Selectivity in CO₂ Electroreduction</div>
+        <div class="pub-authors">Du R., Li T.*, Wu Q., Wang P., Yang X., Fan Y., Qiu Y., Yan K., Wang P., Zhao Y.*, Zhao W.-W.*, <strong>Chen G.*</strong></div>
+        <div class="pub-journal">ACS Applied Materials & Interfaces, 2022, 14, 32, 36527–36535 <a class="pub-link" href="https://doi.org/10.1021/acsami.2c05992" target="_blank">DOI →</a></div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">Engineering cobalt oxide with coexisting cobalt defects and oxygen vacancies for enhanced catalytic oxidation of toluene</div>
+        <div class="pub-authors">Li Y., Chen T., Zhao S., Wu P., Chong Y., Li A., Zhao Y., <strong>Chen G.</strong>, Jin X.*, Qiu Y.*, Ye D.</div>
+        <div class="pub-journal">ACS Catalysis, 2022, 12, 9, 4906–4917 <a class="pub-link" href="https://doi.org/10.1021/acscatal.2c00296" target="_blank">DOI →</a></div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">Perovskite Cs₃Bi₂I₉ Hexagonal Prisms with Ordered Geometry for Enhanced Photocatalytic Hydrogen Evolution</div>
+        <div class="pub-authors">Li M., Xu S., Wu L., Tang H., Zhou B., Xu J., Yang Q., Zhou T., Qiu Y., <strong>Chen G.</strong>, Waterhouse G.I.N., Yan K.*</div>
+        <div class="pub-journal">ACS Energy Letters, 2022, 7, 10, 3370–3377 <a class="pub-link" href="https://doi.org/10.1021/acsenergylett.2c01856" target="_blank">DOI →</a></div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">Unveiling the water-resistant mechanism of Cu(I)-O-Co interfaces for catalytic oxidation</div>
+        <div class="pub-authors">Zhao S., Wu P., Lin J., Li Y., Li A., Jin X., Chen Y., Zhao B., Zhao Y.*, <strong>Chen G.</strong>, Qiu Y.*, Ye D., Yang S.</div>
+        <div class="pub-journal">Chemical Engineering Journal, 2022, 429, 132219 <a class="pub-link" href="https://doi.org/10.1016/j.cej.2021.132219" target="_blank">DOI →</a></div>
+      </div>
+    </div>
+
+    <div class="pub-year-group" data-year="2021">
+      <div class="pub-year-header">2021</div>
+
+      <div class="pub-item">
+        <div class="pub-title">Organic wastewater treatment by a single-atom catalyst and electrolytically produced H₂O₂</div>
+        <div class="pub-authors">Xu J., Zheng X., Feng Z., Lu Z., Zhang Z., Huang W., Li Y., Vuckovic D., Li Y., Dai S., <strong>Chen G.</strong>, Wang K., Wang H., Chen J.K., Mitch W., Cui Y.*</div>
+        <div class="pub-journal">Nature Sustainability, 2021, 4, 233–241 <a class="pub-link" href="https://doi.org/10.1038/s41893-020-00635-w" target="_blank">DOI →</a></div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">Activating metal oxide nanocatalysts for electrocatalytic water oxidation by quenching-induced near-surface metal atom functionality</div>
+        <div class="pub-authors">Ye C., Liu J., Zhang Q., Jin X., Zhao Y.*, Pan Z., <strong>Chen G.</strong>, Qiu Y.*, Ye D., Gu L., Waterhouse G.I.N., Guo L.*, Yang S.</div>
+        <div class="pub-journal">J. Am. Chem. Soc., 2021, 143, 35, 14169–14177 <a class="pub-link" href="https://doi.org/10.1021/jacs.1c04737" target="_blank">DOI →</a></div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">A Hydrothermally Stable Single-Atom Pt Catalyst on High-Entropy Oxide/Al₂O₃ for Enhanced Catalytic Activity</div>
+        <div class="pub-authors">Zhao S., Lin J., Wu P., Ye C., Li Y., Li A., Jin X., Zhao Y., <strong>Chen G.</strong>, Qiu Y.*, Ye D.</div>
+        <div class="pub-journal">ACS Applied Materials & Interfaces, 2021, 13, 41, 48764–48773 <a class="pub-link" href="https://doi.org/10.1021/acsami.1c14456" target="_blank">DOI →</a></div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">Engineering Co³⁺-rich crystal planes on Co₃O₄ hexagonal nanosheets for CO and hydrocarbons oxidation</div>
+        <div class="pub-authors">Zhao S., Li T., Lin J., Wu P., Li Y., Li A., Chen T., Zhao Y., <strong>Chen G.</strong>, Yang L., Meng Y., Jin X., Qiu Y.*, Ye D.</div>
+        <div class="pub-journal">Chemical Engineering Journal, 2021, 420, 130448 <a class="pub-link" href="https://doi.org/10.1016/j.cej.2021.130448" target="_blank">DOI →</a></div>
+      </div>
+    </div>
+
+    <div class="pub-year-group" data-year="2020">
+      <div class="pub-year-header">2020</div>
+
+      <div class="pub-item">
+        <div class="pub-title">A universal seeding strategy to synthesize single atom catalysts on 2D materials for electrocatalytic applications</div>
+        <div class="pub-authors">Zhao S., <strong>Chen G.</strong>, Zhou G., Yin L.-C., Veder J.-P., Johannessen B., Saunders M., Yang S.-Z.*, De Marco R., Liu C.*, Jiang S.P.*</div>
+        <div class="pub-journal">Advanced Functional Materials, 2020, 30(6), 1906157 <a class="pub-link" href="https://doi.org/10.1002/adfm.201906157" target="_blank">DOI →</a></div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">Membrane‐Free Zn/MnO₂ Flow Battery for Large‐Scale Energy Storage</div>
+        <div class="pub-authors">Li G., Chen W., Zhang H., Gong Y., Shi F., Wang J., Zhang R., <strong>Chen G.</strong>, Jin Y., Wu T., Tang Z., Cui Y.*</div>
+        <div class="pub-journal">Advanced Energy Materials, 2020, 10(9), 1902085 <a class="pub-link" href="https://doi.org/10.1002/aenm.201902085" target="_blank">DOI →</a></div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">Interfacial effects in hierarchically porous α-MnO₂/Mn₃O₄ heterostructures promote photocatalytic oxidation activity</div>
+        <div class="pub-authors">Wu P., Dai S., <strong>Chen G.</strong>, Zhao S., Xu Z., Fu M., Chen P., Chen Q., Jin X.*, Qiu Y.*, Yang S., Ye D.</div>
+        <div class="pub-journal">Applied Catalysis B: Environmental, 2020, 268, 118418 <a class="pub-link" href="https://doi.org/10.1016/j.apcatb.2019.118418" target="_blank">DOI →</a></div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">Cu²⁺-Decorated Porous Co₃O₄ Nanosheets for Photothermocatalytic Oxidation of Toluene</div>
+        <div class="pub-authors">Zhao S., Jin X.*, Wu P., Zhao Y., <strong>Chen G.</strong>, Li Y., Li A., Ye D., Qiu Y.*</div>
+        <div class="pub-journal">ACS Applied Nano Materials, 2020, 3, 10, 10454–10461 <a class="pub-link" href="https://doi.org/10.1021/acsanm.0c02347" target="_blank">DOI →</a></div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">A synchronous nucleation and passivation strategy for controllable synthesis of Au₃₆(PA)₂₄</div>
+        <div class="pub-authors">Ma X., Ma G., Qin L., <strong>Chen G.</strong>, Chen S.*, Tang Z.*</div>
+        <div class="pub-journal">Science China Chemistry, 2020, 63, 1777–1784 <a class="pub-link" href="https://doi.org/10.1007/s11426-020-9819-4" target="_blank">DOI →</a></div>
+      </div>
+    </div>
+
+    <div class="pub-year-group" data-year="2014">
+      <div class="pub-year-header">2014 (Selected Early Works)</div>
+
+      <div class="pub-item">
+        <div class="pub-title">Interfacial effects in iron-nickel hydroxide–platinum nanoparticles enhance catalytic oxidation <span class="pub-badge">Science</span></div>
+        <div class="pub-authors"><strong>Chen G.</strong>, Zhao Y., Fu G.*, Duchesne P.N., Gu L.*, Zheng Y., Weng X., Chen M., Zhang P., Pao C.-W., Lee J.-F., Zheng N.*</div>
+        <div class="pub-journal">Science, 2014, 344(6183), 495–499 <a class="pub-link" href="https://doi.org/10.1126/science.1252553" target="_blank">DOI →</a></div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">Electrostatic self-assembling formation of Pd superlattice nanowires from surfactant-free ultrathin Pd nanosheets</div>
+        <div class="pub-authors">Hu C., Lin K., Wang X., Liu S., Yi J., Tian Y., Wu B., <strong>Chen G.</strong>, Yang H., Dai Y., Li H., Zheng N.</div>
+        <div class="pub-journal">J. Am. Chem. Soc., 2014, 136, 37, 12856–12859 <a class="pub-link" href="https://doi.org/10.1021/ja507409p" target="_blank">DOI →</a></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- TEACHING -->
+<div id="page-teaching" class="page">
+  <div class="container">
+    <div class="section-title">Teaching</div>
+    <div class="section-divider"></div>
+    <div class="content-block">
+      <h3>📘 无机化学 · Inorganic Chemistry</h3>
+      <p>面向环境学科本科生，<strong>32学时</strong>。课程覆盖无机化学基本原理、元素化学及无机功能材料基础知识。</p>
+    </div>
+    <div class="content-block">
+      <h3>🧪 无机化学实验（I）· Inorganic Chemistry Lab (I)</h3>
+      <p>本科生实验课程，<strong>32学时</strong>。培养学生基本实验操作技能和科学探究思维方法。</p>
+    </div>
+    <div class="content-block">
+      <h3>🎓 环境与能源学科前沿讲座 · Frontiers in Environment and Energy Sciences</h3>
+      <p>研究生课程，<strong>3学时</strong>。介绍环境与能源领域最新研究进展，涵盖电催化、热催化、纳米材料与可持续化学等前沿方向。</p>
+    </div>
+  </div>
+</div>
+
+<!-- LAB LIFE -->
+<div id="page-lablife" class="page">
+  <div class="container">
+    <div class="section-title">Lab Life</div>
+    <div class="section-divider"></div>
+    <p style="font-size:0.95rem;line-height:1.85;color:#555;margin-bottom:36px">We believe that a supportive and collaborative environment is essential for great science. Our lab at SCUT values curiosity, open communication, and mutual respect among all members.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px;margin-bottom:40px">
+      <div class="content-block" style="margin-bottom:0"><h3>📚 Weekly Group Meeting</h3><p>Regular group meetings with research progress reports, paper discussions, and invited talks to keep everyone connected and inspired.</p></div>
+      <div class="content-block" style="margin-bottom:0"><h3>🎂 Group Activities</h3><p>Birthday celebrations, group dinners, and annual lab retreats to build team spirit and a positive working atmosphere.</p></div>
+      <div class="content-block" style="margin-bottom:0"><h3>🏃 Sports & Wellness</h3><p>Lab members organize sports including badminton, basketball, and hiking to maintain work-life balance.</p></div>
+    </div>
+    <div style="background:#fff;border:1px solid var(--border);border-radius:10px;padding:32px;text-align:center;color:var(--text-muted)">
+      📷 Photo gallery coming soon!
+    </div>
+  </div>
+</div>
+
+<!-- OPENINGS -->
+<div id="page-openings" class="page">
+  <div class="container">
+    <div class="section-title">Openings</div>
+    <div class="section-divider"></div>
+
+    <div class="opening-card">
+      <h3>🔬 博士后招募（长期有效）· Postdoctoral Positions (Ongoing)</h3>
+      <p><strong>电催化方向</strong>（2–3名）：电化学醇醛精准转化、电化学CO₂固定与应用、电化学催化反应与分离系统</p>
+      <p><strong>热催化方向</strong>（2–3名）：小分子化学储氢/放氢、环境催化VOCs、塑料可再生利用</p>
+      <p><strong>AI + 材料合成 + 催化</strong>（1–2名）：AI辅助材料合成与催化探索基础研究</p>
+
+      <table class="salary-table">
+        <tr><th>类别</th><th>条件</th><th>年薪</th></tr>
+        <tr><td>至臻博后</td><td>博士毕业单位世界前100</td><td><strong>40万元/年</strong></td></tr>
+        <tr><td>A类博后</td><td>博士毕业单位世界前200</td><td><strong>35万元/年</strong></td></tr>
+        <tr><td>B类博后</td><td>获得博士学位</td><td><strong>30万元/年</strong></td></tr>
+      </table>
+
+      <ul>
+        <li>学校综合年薪最高可达 <strong>57万元</strong></li>
+        <li>按规定缴纳社会保险和住房公积金，并享受相关福利待遇</li>
+        <li>享受博士后公寓或租房补贴</li>
+        <li>子女可入读学校优质附属幼儿园和实验学校</li>
+        <li>依托广州国际校区招收的博士后可额外获得 <strong>20万元</strong> 科研启动费</li>
+        <li>出站后留粤工作，符合广东省相关政策的，省财政额外给予 <strong>40万元住房补贴</strong>（3年）</li>
+      </ul>
+    </div>
+
+    <div class="opening-card">
+      <h3>🎓 博士/硕士研究生招募</h3>
+      <p>欢迎有志于从事电催化、热催化及纳米材料研究的优秀同学报考课题组博士生或硕士生。请将个人简历和成绩单发至以下邮箱与陈老师联系。</p>
+    </div>
+
+    <div class="opening-card">
+      <h3>📬 联系方式 · Contact</h3>
+      <p>请发送简历、成绩单及研究兴趣说明至：<strong style="color:var(--crimson)">cgx08@scut.edu.cn</strong>（陈老师）</p>
+    </div>
+  </div>
+</div>
+
+<!-- NEWS -->
+<div id="page-news" class="page">
+  <div class="container">
+    <div class="section-title">News</div>
+    <div class="section-divider"></div>
+    <ul class="news-list" style="max-width:820px">
+      <li><span class="news-date">2026</span><span class="news-text"><span class="badge">Paper</span>Electrochemical O₂ removal paper published in <em>Chem. Commun.</em></span></li>
+      <li><span class="news-date">2025</span><span class="news-text"><span class="badge">Paper</span>CO₂ electroreduction for urban wastewater denitrification published in <em>Nature Water</em>.</span></li>
+      <li><span class="news-date">2025</span><span class="news-text"><span class="badge">Paper</span>Integrated CO₂ reduction & product separation system published in <em>Nature Communications</em>.</span></li>
+      <li><span class="news-date">2025</span><span class="news-text"><span class="badge">Paper</span>Autonomous robotic nanoparticle synthesis platform published in <em>Nature Communications</em>.</span></li>
+      <li><span class="news-date">2025</span><span class="news-text"><span class="badge">Paper</span>PtZn-ZnO<sub>x</sub> interface for benzyl alcohol electrooxidation published in <em>JACS</em>.</span></li>
+      <li><span class="news-date">2025</span><span class="news-text"><span class="badge">Paper</span>Li₂ZrF₆-based electrolytes for lithium metal batteries published in <em>Nature</em> (collaborative work).</span></li>
+      <li><span class="news-date">2024</span><span class="news-text"><span class="badge">Grant</span>科技部重点研发计划课题立项，245万元，2025–2028。</span></li>
+      <li><span class="news-date">2024</span><span class="news-text"><span class="badge">Grant</span>国家自然科学基金面上项目获批，50万元，2025–2028。</span></li>
+      <li><span class="news-date">2024</span><span class="news-text"><span class="badge">Paper</span>Enhanced biomass oxidation by Ni²⁺-O-Pd interfaces published in <em>Nature Communications</em>.</span></li>
+      <li><span class="news-date">2023</span><span class="news-text"><span class="badge">Paper</span>Fingerprint MoS₂ water disinfection nanosystem published in <em>Nature Water</em> (collaborative work with Prof. Yi Cui).</span></li>
+    </ul>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div id="page-contact" class="page">
+  <div class="container">
+    <div class="section-title">Contact</div>
+    <div class="section-divider"></div>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h3>Get in Touch</h3>
+        <div class="contact-row">
+          <span class="contact-icon">👤</span>
+          <div><p><strong>Prof. Guangxu Chen (陈光需)</strong><br>Professor & Ph.D. Advisor<br>School of Environment and Energy<br>South China University of Technology<br>华南理工大学 环境与能源学院</p></div>
+        </div>
+        <div class="contact-row">
+          <span class="contact-icon">✉️</span>
+          <div><p>cgx08@scut.edu.cn</p></div>
+        </div>
+        <div class="contact-row">
+          <span class="contact-icon">📍</span>
+          <div>
+            <p>广州市番禺区广州大学城外环东路382号<br>华南理工大学，邮编：510006</p>
+            <p style="margin-top:6px;font-size:0.82rem;color:var(--text-muted)">No. 382 Outer Ring East Road, Guangzhou University Town<br>Panyu District, Guangzhou 510006, China</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="map-box">
+          <span style="font-size:2.5rem">📍</span>
+          <strong>华南理工大学</strong>
+          <span>South China University of Technology</span>
+          <span style="font-size:0.8rem">广州大学城 · Guangzhou University Town</span>
+          <span style="font-size:0.78rem;color:#aaa">番禺区，广州，510006</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <strong>Guangxu Chen's Research Group</strong> · School of Environment and Energy · South China University of Technology (华南理工大学)<br>
+  <span style="font-size:0.72rem;margin-top:4px;display:block">广州市番禺区广州大学城外环东路382号 · 510006 · cgx08@scut.edu.cn</span>
+</footer>
+
+<script>
+  function showPage(name, el) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+    document.getElementById('page-' + name).classList.add('active');
+    el.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  function filterPubs(year, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.pub-year-group').forEach(g => {
+      g.style.display = (year === 'all' || g.dataset.year === year) ? 'block' : 'none';
+    });
+  }
+</script>
+</body>
+</html>
