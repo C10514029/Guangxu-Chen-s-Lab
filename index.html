@@ -142,7 +142,7 @@
   .research-card .rc-icon { font-size: 1.8rem; margin-bottom: 10px; }
   .research-card h3 { font-family: 'EB Garamond', serif; font-size: 1.1rem; margin-bottom: 8px; color: var(--crimson-dark); }
   .research-card p { font-size: 0.87rem; line-height: 1.7; color: #555; }
-  .research-card .rc-media { width: 100%; height: 170px; object-fit: cover; display: block; }
+  .research-card .rc-media { width: 100%; height: 200px; object-fit: cover; display: block; }
   .research-card .rc-body { padding: 22px 22px 22px 26px; }
 
   /* PROJECTS */
@@ -195,8 +195,6 @@
   footer strong { color: rgba(255,255,255,0.9); }
 
   @media (max-width: 760px) {
-    /* Smaller research media on mobile */
-    .research-card .rc-media { height: 150px; }
     .container { padding: 28px 18px; }
     .home-hero, .pi-bio-grid, .contact-grid { grid-template-columns: 1fr; }
     .stats-row { grid-template-columns: repeat(2,1fr); }
@@ -274,9 +272,7 @@
     <div class="news-section">
       <h3>Latest News</h3>
       <ul class="news-list" id="home-news-list">
-        </ul>
-        <ul class="news-list" id="news-source" style="display:none">
-<li><span class="news-date">2026</span><span class="news-text"><span class="badge">Paper</span>Pt–O–Ti interface for low-voltage HMF electrooxidation published in <em>Nano Letters</em>.</span></li>
+        <li><span class="news-date">2026</span><span class="news-text"><span class="badge">Paper</span>Pt–O–Ti interface for low-voltage HMF electrooxidation published in <em>Nano Letters</em>.</span></li>
         <li><span class="news-date">2026</span><span class="news-text"><span class="badge">Paper</span>Carbonate-incorporated cobalt hydroxides for HMF electrooxidation published in <em>Nano Research</em>.</span></li>
         <li><span class="news-date">2026</span><span class="news-text"><span class="badge">Paper</span>Electrochemical oxygen removal work published in <em>Chem. Commun.</em></span></li>
         <li><span class="news-date">2025</span><span class="news-text"><span class="badge">Paper</span>CO₂ electroreduction for urban wastewater denitrification published in <em>Nature Water</em>.</span></li>
@@ -286,8 +282,7 @@
         <li><span class="news-date">2024</span><span class="news-text"><span class="badge">Grant</span>科技部重点研发计划课题立项（循环经济），245万元，2025–2028。</span></li>
         <li><span class="news-date">2024</span><span class="news-text"><span class="badge">Grant</span>国家自然科学基金面上项目获批，50万元，2025–2028。</span></li>
         <li><span class="news-date">2024</span><span class="news-text"><span class="badge">Paper</span>Enhanced biomass oxidation by Ni²⁺-O-Pd interfaces published in <em>Nature Communications</em>.</span></li>
-        </ul>
-
+      </ul>
     </div>
   </div>
 </div>
@@ -1312,12 +1307,12 @@
         </div>
         <div class="contact-row">
           <span class="contact-icon">✉️</span>
-          <div><p><a href="mailto:cgx08@scut.edu.cn">cgx08@scut.edu.cn</a></p></div>
+          <div><p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b3d0d4cb838bf3c0d0c6c79dd6d7c69dd0dd">[email&#160;protected]</a></p></div>
         </div>
         <div class="contact-row">
           <span class="contact-icon">📍</span>
           <div>
-            <p>Address：广州市番禺区广州大学城外环东路382号，邮编为510006。</p>
+            <p>广州市番禺区广州大学城外环东路382号<br>华南理工大学，邮编：510006</p>
             <p style="margin-top:6px;font-size:0.82rem;color:var(--text-muted)">No. 382 Outer Ring East Road, Guangzhou University Town<br>Panyu District, Guangzhou 510006, China</p>
           </div>
         </div>
@@ -1379,29 +1374,13 @@ function filterPubs(year, btn) {
   }
 }
 
-function renderNews() {
-  var source = document.getElementById('news-source');
-  var home = document.getElementById('home-news-list');
-  var full = document.getElementById('full-news-list');
-  if (!source) return;
-
-  // Clone nodes so home/news always stay in sync from a single source
-  var items = Array.prototype.slice.call(source.querySelectorAll('li'));
-
-  if (home) {
-    home.innerHTML = '';
-    items.slice(0, 6).forEach(function(li) {
-      home.appendChild(li.cloneNode(true));
-    });
+function syncNews() {
+  var src = document.getElementById('home-news-list');
+  var dst = document.getElementById('full-news-list');
+  if (src && dst) {
+    dst.innerHTML = src.innerHTML;
   }
-
-  if (full) {
-    full.innerHTML = '';
-    items.forEach(function(li) {
-      full.appendChild(li.cloneNode(true));
-    });
-  }
-}}
+}
 
 function showPage(id, el) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
@@ -1409,11 +1388,10 @@ function showPage(id, el) {
   var page = document.getElementById('page-' + id);
   if (page) page.classList.add('active');
   if (el) el.classList.add('active');
-  if (id === 'news') renderNews();
+  if (id === 'news') syncNews();
 }
 // Show home page by default
 document.addEventListener('DOMContentLoaded', function() {
-  renderNews();
   showPage('home', document.querySelector('nav a'));
 });
 </script>
