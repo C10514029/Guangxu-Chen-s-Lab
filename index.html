@@ -1399,9 +1399,11 @@ function bindNewsSync() {
 
 function memberPhotoCandidates(member) {
   const overridePhoto = {
+    '刘道儒': 'assets/img/people/2021_PhD_刘道儒.jpeg',
     '杨金': 'assets/img/people/PhD_郑远杰.png',
     '郑远杰': 'assets/img/people/PhD_杨金.jpeg'
   };
+  const photoDegree = member.original_degree || member.degree;
   const encodedName = encodeURIComponent(member.name || '');
   const swapped = overridePhoto[member.name];
   const baseName = `assets/img/people/${encodedName}`;
@@ -1411,13 +1413,21 @@ function memberPhotoCandidates(member) {
     `${baseName}.png`,
     `${baseName}.jpg`,
     `${baseName}.jpeg`,
-    `assets/img/people/${member.year || ''}_${member.degree || ''}_${member.name}.png`,
-    `assets/img/people/${member.year || ''}_${member.degree || ''}_${member.name}.jpg`,
-    `assets/img/people/${member.year || ''}_${member.degree || ''}_${member.name}.jpeg`,
-    `assets/img/people/${member.degree || ''}_${member.name}.png`,
-    `assets/img/people/${member.degree || ''}_${member.name}.jpg`,
-    `assets/img/people/${member.degree || ''}_${member.name}.jpeg`
+    `assets/img/people/${member.year || ''}_${photoDegree || ''}_${member.name}.png`,
+    `assets/img/people/${member.year || ''}_${photoDegree || ''}_${member.name}.jpg`,
+    `assets/img/people/${member.year || ''}_${photoDegree || ''}_${member.name}.jpeg`,
+    `assets/img/people/${photoDegree || ''}_${member.name}.png`,
+    `assets/img/people/${photoDegree || ''}_${member.name}.jpg`,
+    `assets/img/people/${photoDegree || ''}_${member.name}.jpeg`
   ].filter(Boolean);
+}
+
+function memberPhotoPosition(member) {
+  const positionMap = {
+    '钟明洁': 'center 28%',
+    '田姝颖': 'center 30%'
+  };
+  return positionMap[member.name] || 'center 30%';
 }
 
 function attachMemberImage(img, candidates) {
@@ -1452,6 +1462,7 @@ function createPersonCard(member, sectionTitle) {
   const photo = document.createElement('img');
   photo.className = 'person-photo';
   photo.alt = `${member.name} photo`;
+  photo.style.objectPosition = memberPhotoPosition(member);
   attachMemberImage(photo, memberPhotoCandidates(member));
   card.appendChild(photo);
 
@@ -1545,7 +1556,7 @@ async function loadPeopleData() {
       (graduateByYear[year] || []).map((m) => ({ ...m, year }))
     );
 
-    const postdocs = alumni.filter((m) => m.name === '刘道儒').map((m) => ({ ...m, degree: 'Postdoc' }));
+    const postdocs = alumni.filter((m) => m.name === '刘道儒').map((m) => ({ ...m, original_degree: m.degree, degree: 'Postdoc' }));
     const alumniFiltered = alumni.filter((m) => m.name !== '刘道儒');
     const phd = graduate.filter((m) => m.degree === 'PhD');
     const masters = graduate.filter((m) => m.degree === 'Master');
