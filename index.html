@@ -1398,17 +1398,10 @@ function bindNewsSync() {
 
 
 function memberPhotoCandidates(member) {
-  const overridePhoto = {
-    '刘道儒': 'assets/img/people/2021_PhD_刘道儒.jpeg',
-    '杨金': 'assets/img/people/PhD_郑远杰.png',
-    '郑远杰': 'assets/img/people/PhD_杨金.jpeg'
-  };
   const photoDegree = member.original_degree || member.degree;
   const encodedName = encodeURIComponent(member.name || '');
-  const swapped = overridePhoto[member.name];
   const baseName = `assets/img/people/${encodedName}`;
   return [
-    swapped,
     member.photo,
     `${baseName}.png`,
     `${baseName}.jpg`,
