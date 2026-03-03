@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lab Members</title>
+  <style>
+    :root {
+      --bg: #faf9f7;
+      --card: #ffffff;
+      --text: #1c1c1c;
+      --muted: #666;
+      --border: #e8e0d0;
+      --primary: #8b1a1a;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Source Sans 3", "PingFang SC", "Microsoft YaHei", sans-serif;
+      color: var(--text);
+      background: var(--bg);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 32px 20px 48px;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      color: var(--primary);
+      font-size: 2rem;
+    }
+
+    .hint {
+      margin: 0 0 24px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .panel {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+    }
+
+    .panel h2 {
+      margin: 4px 0 16px;
+      color: var(--primary);
+      font-size: 1.4rem;
+    }
+
+    .member-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .member-card {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px;
+      display: grid;
+      grid-template-columns: 56px 1fr;
+      gap: 12px;
+      background: #fff;
+    }
+
+    .avatar {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid var(--border);
+      background: #f2f2f2;
+    }
+
+    .member-name {
+      margin: 0;
+      font-size: 1rem;
+      color: #222;
+    }
+
+    .meta {
+      margin: 3px 0;
+      font-size: 0.9rem;
+      color: #333;
+      line-height: 1.45;
+    }
+
+    .muted { color: var(--muted); }
+
+    details.year-group {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px;
+      background: #fff;
+      margin-bottom: 10px;
+    }
+
+    details.year-group > summary {
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+
+    a.email {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    a.email:hover { text-decoration: underline; }
+
+    .error {
+      padding: 12px;
+      border: 1px solid #f0b2b2;
+      background: #fff5f5;
+      color: #9f1d1d;
+      border-radius: 8px;
+    }
+
+    @media (max-width: 900px) {
+      .columns {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Members</h1>
+    <p class="hint">按 Alumni / Graduate 分栏展示；Graduate 按年份折叠。</p>
+
+    <div id="status"></div>
+
+    <div class="columns" id="content" hidden>
+      <section class="panel">
+        <h2>Alumni</h2>
+        <div class="member-list" id="alumni-list"></div>
+      </section>
+
+      <section class="panel">
+        <h2>Graduate</h2>
+        <div id="graduate-years"></div>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    function createMemberCard(member, showYear = false) {
+      const card = document.createElement('article');
+      card.className = 'member-card';
+
+      const img = document.createElement('img');
+      img.className = 'avatar';
+      img.alt = `${member.name} 头像`;
+      img.src = member.photo || 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(
+        '<svg xmlns="http://www.w3.org/2000/svg" width="56" height="56"><rect width="100%" height="100%" fill="#ececec"/><text x="50%" y="52%" dominant-baseline="middle" text-anchor="middle" font-size="11" fill="#999">photo</text></svg>'
+      );
+
+      const info = document.createElement('div');
+      const name = document.createElement('h3');
+      name.className = 'member-name';
+      name.textContent = `${member.name} (${member.degree})`;
+
+      const research = document.createElement('p');
+      research.className = 'meta';
+      research.innerHTML = `<span class="muted">研究方向：</span>${member.research}`;
+
+      const school = document.createElement('p');
+      school.className = 'meta';
+      school.innerHTML = `<span class="muted">本科院校：</span>${member.undergraduate_school}`;
+
+      const email = document.createElement('p');
+      email.className = 'meta';
+      email.innerHTML = `<span class="muted">邮箱：</span><a class="email" href="mailto:${member.email}">${member.email}</a>`;
+
+      info.appendChild(name);
+      if (showYear && member.year) {
+        const year = document.createElement('p');
+        year.className = 'meta';
+        year.innerHTML = `<span class="muted">届别：</span>${member.year}`;
+        info.appendChild(year);
+      }
+      info.appendChild(research);
+      info.appendChild(school);
+      info.appendChild(email);
+
+      card.appendChild(img);
+      card.appendChild(info);
+      return card;
+    }
+
+    async function loadMembers() {
+      const status = document.getElementById('status');
+      const content = document.getElementById('content');
+
+      try {
+        const res = await fetch('data/students.json');
+        if (!res.ok) throw new Error(`加载失败: ${res.status}`);
+        const data = await res.json();
+
+        const alumniList = document.getElementById('alumni-list');
+        data.Alumni.forEach((m) => alumniList.appendChild(createMemberCard(m, true)));
+
+        const graduateYears = document.getElementById('graduate-years');
+        Object.keys(data.Graduate)
+          .sort((a, b) => Number(a) - Number(b))
+          .forEach((year) => {
+            const details = document.createElement('details');
+            details.className = 'year-group';
+            details.open = year === Object.keys(data.Graduate)[0];
+
+            const summary = document.createElement('summary');
+            summary.textContent = `${year} (${data.Graduate[year].length} 人)`;
+            details.appendChild(summary);
+
+            const list = document.createElement('div');
+            list.className = 'member-list';
+            data.Graduate[year].forEach((m) => list.appendChild(createMemberCard({ ...m, year })));
+            details.appendChild(list);
+
+            graduateYears.appendChild(details);
+          });
+
+        content.hidden = false;
+      } catch (err) {
+        status.innerHTML = `<div class="error">无法加载 data/students.json：${err.message}</div>`;
+      }
+    }
+
+    loadMembers();
+  </script>
+</body>
+</html>
