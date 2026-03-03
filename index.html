@@ -1397,41 +1397,50 @@ function bindNewsSync() {
 
 
 
+function memberZhName(member) {
+  if (member.name_zh) return member.name_zh;
+  const match = (member.name || '').match(/（(.+?)）/);
+  return match ? match[1] : (member.name || '');
+}
+
 function memberPhotoCandidates(member) {
+  const zhName = memberZhName(member);
   const manualPhotoMap = {
     '郑远杰': 'assets/img/people/PhD_杨金.jpeg',
     '杨金': 'assets/img/people/PhD_郑远杰.png',
     '钟明洁': 'assets/img/people/2022_Master_钟明洁.png'
   };
   const photoDegree = member.original_degree || member.degree;
-  const encodedName = encodeURIComponent(member.name || '');
+  const encodedName = encodeURIComponent(zhName || member.name || '');
   const baseName = `assets/img/people/${encodedName}`;
   return [
-    manualPhotoMap[member.name],
+    manualPhotoMap[zhName],
     member.photo,
     `${baseName}.png`,
     `${baseName}.jpg`,
     `${baseName}.jpeg`,
-    `assets/img/people/${member.year || ''}_${photoDegree || ''}_${member.name}.png`,
-    `assets/img/people/${member.year || ''}_${photoDegree || ''}_${member.name}.jpg`,
-    `assets/img/people/${member.year || ''}_${photoDegree || ''}_${member.name}.jpeg`,
-    `assets/img/people/${photoDegree || ''}_${member.name}.png`,
-    `assets/img/people/${photoDegree || ''}_${member.name}.jpg`,
-    `assets/img/people/${photoDegree || ''}_${member.name}.jpeg`
+    `assets/img/people/${member.year || ''}_${photoDegree || ''}_${zhName}.png`,
+    `assets/img/people/${member.year || ''}_${photoDegree || ''}_${zhName}.jpg`,
+    `assets/img/people/${member.year || ''}_${photoDegree || ''}_${zhName}.jpeg`,
+    `assets/img/people/${photoDegree || ''}_${zhName}.png`,
+    `assets/img/people/${photoDegree || ''}_${zhName}.jpg`,
+    `assets/img/people/${photoDegree || ''}_${zhName}.jpeg`
   ].filter(Boolean);
 }
 
 function memberPhotoPosition(member) {
+  const zhName = memberZhName(member);
   const positionMap = {
     '钟明洁': 'center 28%',
     '田姝颖': 'center 30%'
   };
-  return positionMap[member.name] || 'center 30%';
+  return positionMap[zhName] || 'center 30%';
 }
 
 function memberPhotoStyle(member) {
+  const zhName = memberZhName(member);
   const smallerPhotoNames = new Set(['吴祺祺', '种亚楠', '高繁', '杨华岳', '刘淑敏']);
-  if (smallerPhotoNames.has(member.name)) {
+  if (smallerPhotoNames.has(zhName)) {
     return {
       fit: 'contain',
       padding: '6px',
@@ -1575,8 +1584,8 @@ async function loadPeopleData() {
       (graduateByYear[year] || []).map((m) => ({ ...m, year }))
     );
 
-    const postdocs = alumni.filter((m) => m.name === '刘道儒').map((m) => ({ ...m, original_degree: m.degree, degree: 'Postdoc' }));
-    const alumniFiltered = alumni.filter((m) => m.name !== '刘道儒');
+    const postdocs = alumni.filter((m) => memberZhName(m) === '刘道儒').map((m) => ({ ...m, original_degree: m.degree, degree: 'Postdoc' }));
+    const alumniFiltered = alumni.filter((m) => memberZhName(m) !== '刘道儒');
     const phd = graduate.filter((m) => m.degree === 'PhD');
     const masters = graduate.filter((m) => m.degree === 'Master');
     const undergrads = graduate.filter((m) => m.degree === 'Undergraduate');
