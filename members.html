@@ -15,6 +15,7 @@
     }
 
     * { box-sizing: border-box; }
+
     body {
       margin: 0;
       font-family: "Source Sans 3", "PingFang SC", "Microsoft YaHei", sans-serif;
@@ -42,7 +43,7 @@
 
     .columns {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr;
       gap: 20px;
       align-items: start;
     }
@@ -63,6 +64,7 @@
 
     .member-list {
       display: grid;
+      grid-template-columns: repeat(1, minmax(0, 1fr));
       gap: 12px;
     }
 
@@ -71,14 +73,16 @@
       border-radius: 10px;
       padding: 12px;
       display: grid;
-      grid-template-columns: 56px 1fr;
+      grid-template-columns: 72px 1fr;
       gap: 12px;
+      align-items: start;
       background: #fff;
+      min-height: 120px;
     }
 
     .avatar {
-      width: 56px;
-      height: 56px;
+      width: 72px;
+      height: 72px;
       border-radius: 50%;
       object-fit: cover;
       border: 1px solid var(--border);
@@ -96,6 +100,7 @@
       font-size: 0.9rem;
       color: #333;
       line-height: 1.45;
+      word-break: break-word;
     }
 
     .muted { color: var(--muted); }
@@ -130,9 +135,15 @@
       border-radius: 8px;
     }
 
-    @media (max-width: 900px) {
-      .columns {
-        grid-template-columns: 1fr;
+    @media (min-width: 700px) {
+      .member-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .member-list {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
       }
     }
   </style>
@@ -140,7 +151,7 @@
 <body>
   <div class="container">
     <h1>Members</h1>
-    <p class="hint">按 Alumni / Graduate 分栏展示；Graduate 按年份折叠。</p>
+    <p class="hint">分为 Alumni / Graduate 两块；Graduate 按年份分组并可折叠。</p>
 
     <div id="status"></div>
 
@@ -158,16 +169,59 @@
   </div>
 
   <script>
-    function createMemberCard(member, showYear = false) {
+    const placeholderAvatar = 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(
+      '<svg xmlns="http://www.w3.org/2000/svg" width="72" height="72"><rect width="100%" height="100%" fill="#ececec"/><text x="50%" y="52%" dominant-baseline="middle" text-anchor="middle" font-size="11" fill="#999">No Photo</text></svg>'
+    );
+
+    function buildCandidatePhotos(member) {
+      const encodedName = encodeURIComponent(member.name);
+      const baseName = `assets/img/people/${encodedName}`;
+
+      const candidates = [
+        member.photo,
+        `${baseName}.png`,
+        `${baseName}.jpg`,
+        `${baseName}.jpeg`,
+        `assets/img/people/${member.year || ''}_${member.degree || ''}_${member.name}.png`,
+        `assets/img/people/${member.year || ''}_${member.degree || ''}_${member.name}.jpg`,
+        `assets/img/people/${member.year || ''}_${member.degree || ''}_${member.name}.jpeg`,
+        `assets/img/people/${member.degree || ''}_${member.name}.png`,
+        `assets/img/people/${member.degree || ''}_${member.name}.jpg`,
+        `assets/img/people/${member.degree || ''}_${member.name}.jpeg`
+      ];
+
+      return candidates.filter(Boolean);
+    }
+
+    function attachImageFallback(img, candidates) {
+      let idx = 0;
+
+      function nextImage() {
+        if (idx >= candidates.length) {
+          img.onerror = null;
+          img.src = placeholderAvatar;
+          return;
+        }
+        const src = candidates[idx++].trim();
+        if (!src) {
+          nextImage();
+          return;
+        }
+        img.src = src;
+      }
+
+      img.onerror = nextImage;
+      nextImage();
+    }
+
+    function createMemberCard(member) {
       const card = document.createElement('article');
       card.className = 'member-card';
 
       const img = document.createElement('img');
       img.className = 'avatar';
       img.alt = `${member.name} 头像`;
-      img.src = member.photo || 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(
-        '<svg xmlns="http://www.w3.org/2000/svg" width="56" height="56"><rect width="100%" height="100%" fill="#ececec"/><text x="50%" y="52%" dominant-baseline="middle" text-anchor="middle" font-size="11" fill="#999">photo</text></svg>'
-      );
+      attachImageFallback(img, buildCandidatePhotos(member));
 
       const info = document.createElement('div');
       const name = document.createElement('h3');
@@ -176,23 +230,17 @@
 
       const research = document.createElement('p');
       research.className = 'meta';
-      research.innerHTML = `<span class="muted">研究方向：</span>${member.research}`;
+      research.innerHTML = `<span class="muted">研究方向：</span>${member.research || '-'}`;
 
       const school = document.createElement('p');
       school.className = 'meta';
-      school.innerHTML = `<span class="muted">本科院校：</span>${member.undergraduate_school}`;
+      school.innerHTML = `<span class="muted">本科院校：</span>${member.undergraduate_school || '-'}`;
 
       const email = document.createElement('p');
       email.className = 'meta';
-      email.innerHTML = `<span class="muted">邮箱：</span><a class="email" href="mailto:${member.email}">${member.email}</a>`;
+      email.innerHTML = `<span class="muted">邮箱：</span><a class="email" href="mailto:${member.email}">${member.email || '-'}</a>`;
 
       info.appendChild(name);
-      if (showYear && member.year) {
-        const year = document.createElement('p');
-        year.className = 'meta';
-        year.innerHTML = `<span class="muted">届别：</span>${member.year}`;
-        info.appendChild(year);
-      }
       info.appendChild(research);
       info.appendChild(school);
       info.appendChild(email);
@@ -212,27 +260,27 @@
         const data = await res.json();
 
         const alumniList = document.getElementById('alumni-list');
-        data.Alumni.forEach((m) => alumniList.appendChild(createMemberCard(m, true)));
+        (data.Alumni || []).forEach((m) => alumniList.appendChild(createMemberCard(m)));
 
         const graduateYears = document.getElementById('graduate-years');
-        Object.keys(data.Graduate)
-          .sort((a, b) => Number(a) - Number(b))
-          .forEach((year) => {
-            const details = document.createElement('details');
-            details.className = 'year-group';
-            details.open = year === Object.keys(data.Graduate)[0];
+        const years = Object.keys(data.Graduate || {}).sort((a, b) => Number(a) - Number(b));
 
-            const summary = document.createElement('summary');
-            summary.textContent = `${year} (${data.Graduate[year].length} 人)`;
-            details.appendChild(summary);
+        years.forEach((year, index) => {
+          const details = document.createElement('details');
+          details.className = 'year-group';
+          details.open = index === 0;
 
-            const list = document.createElement('div');
-            list.className = 'member-list';
-            data.Graduate[year].forEach((m) => list.appendChild(createMemberCard({ ...m, year })));
-            details.appendChild(list);
+          const summary = document.createElement('summary');
+          summary.textContent = `${year} (${data.Graduate[year].length} 人)`;
+          details.appendChild(summary);
 
-            graduateYears.appendChild(details);
-          });
+          const list = document.createElement('div');
+          list.className = 'member-list';
+          data.Graduate[year].forEach((m) => list.appendChild(createMemberCard({ ...m, year })));
+          details.appendChild(list);
+
+          graduateYears.appendChild(details);
+        });
 
         content.hidden = false;
       } catch (err) {
