@@ -132,6 +132,7 @@
   .people-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 20px; }
   .person-card { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 14px; box-shadow: 0 3px 12px rgba(0,0,0,0.04); }
   .person-photo { width: min(100%, 240px); aspect-ratio: 1/1; border-radius: 8px; object-fit: cover; object-position: center top; border: 1px solid var(--border); margin: 0 auto 12px; background: #f2f2f2; }
+  .person-photo-small { width: min(90%, 216px); }
   .person-avatar { width: min(100%, 240px); aspect-ratio: 1/1; border-radius: 8px; background: linear-gradient(135deg, #e8d5a3, var(--crimson-light)); margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; font-family: 'EB Garamond', serif; font-size: 2rem; color: #fff; font-weight: 700; }
   .person-card h4 { font-size: 1rem; font-weight: 700; margin-bottom: 6px; color: #1f1f1f; }
   .person-meta { font-size: 0.82rem; color: #333; line-height: 1.5; margin-bottom: 4px; }
@@ -343,7 +344,7 @@
     </div>
 
     <div id="people-sections"></div>
-    <p class="people-note">* Student information is shown directly on this page. Ph.D., Master's, and Undergraduate sections are grouped by entry year without collapsible panels.</p>
+    <p class="people-note">* Student information is shown directly on this page. Ph.D., Master's, and Undergraduate sections are no longer grouped by year because each profile already includes an entry year.</p>
   </div>
 </div>
 
@@ -1398,10 +1399,16 @@ function bindNewsSync() {
 
 
 function memberPhotoCandidates(member) {
+  const manualPhotoMap = {
+    '郑远杰': 'assets/img/people/PhD_杨金.jpeg',
+    '杨金': 'assets/img/people/PhD_郑远杰.png',
+    '钟明洁': 'assets/img/people/2022_Master_钟明洁.png'
+  };
   const photoDegree = member.original_degree || member.degree;
   const encodedName = encodeURIComponent(member.name || '');
   const baseName = `assets/img/people/${encodedName}`;
   return [
+    manualPhotoMap[member.name],
     member.photo,
     `${baseName}.png`,
     `${baseName}.jpg`,
@@ -1413,6 +1420,20 @@ function memberPhotoCandidates(member) {
     `assets/img/people/${photoDegree || ''}_${member.name}.jpg`,
     `assets/img/people/${photoDegree || ''}_${member.name}.jpeg`
   ].filter(Boolean);
+}
+
+function useSmallerPhoto(member) {
+  const smallerPhotoNames = new Set([
+    '刘淑敏',
+    '曾雅琳',
+    '杨华岳',
+    '吴祺祺',
+    '王鹏',
+    '种亚楠',
+    '田姝颖',
+    '高繁'
+  ]);
+  return smallerPhotoNames.has(member.name);
 }
 
 function memberPhotoPosition(member) {
@@ -1454,6 +1475,7 @@ function createPersonCard(member, sectionTitle) {
 
   const photo = document.createElement('img');
   photo.className = 'person-photo';
+  if (useSmallerPhoto(member)) photo.classList.add('person-photo-small');
   photo.alt = `${member.name} photo`;
   photo.style.objectPosition = memberPhotoPosition(member);
   attachMemberImage(photo, memberPhotoCandidates(member));
@@ -1556,9 +1578,9 @@ async function loadPeopleData() {
     const undergrads = graduate.filter((m) => m.degree === 'Undergraduate');
 
     appendPeopleSection(root, 'Postdoctoral Researchers', postdocs, false);
-    appendPeopleSection(root, 'Ph.D. Students', phd, true);
-    appendPeopleSection(root, "Master's Students", masters, true);
-    appendPeopleSection(root, 'Undergraduate Students', undergrads, true);
+    appendPeopleSection(root, 'Ph.D. Students', phd, false);
+    appendPeopleSection(root, "Master's Students", masters, false);
+    appendPeopleSection(root, 'Undergraduate Students', undergrads, false);
     appendPeopleSection(root, 'Alumni', alumniFiltered, false);
   } catch (err) {
     root.innerHTML = `<p class="person-meta" style="color:#9f1d1d">Unable to load student information: ${err.message}</p>`;
