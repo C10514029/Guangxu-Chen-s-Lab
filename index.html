@@ -1429,6 +1429,22 @@ function memberPhotoPosition(member) {
   return positionMap[member.name] || 'center 30%';
 }
 
+function memberPhotoStyle(member) {
+  const smallerPhotoNames = new Set(['吴祺祺', '种亚楠', '高繁', '杨华岳', '刘淑敏']);
+  if (smallerPhotoNames.has(member.name)) {
+    return {
+      fit: 'contain',
+      padding: '6px',
+      background: '#f5f5f5'
+    };
+  }
+  return {
+    fit: 'cover',
+    padding: '0',
+    background: '#f2f2f2'
+  };
+}
+
 function attachMemberImage(img, candidates) {
   const fallback = 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(
     '<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400"><rect width="100%" height="100%" fill="#ececec"/><text x="50%" y="52%" dominant-baseline="middle" text-anchor="middle" font-size="28" fill="#9a9a9a">No Photo</text></svg>'
@@ -1462,6 +1478,10 @@ function createPersonCard(member, sectionTitle) {
   photo.className = 'person-photo';
   photo.alt = `${member.name} photo`;
   photo.style.objectPosition = memberPhotoPosition(member);
+  const photoStyle = memberPhotoStyle(member);
+  photo.style.objectFit = photoStyle.fit;
+  photo.style.padding = photoStyle.padding;
+  photo.style.background = photoStyle.background;
   attachMemberImage(photo, memberPhotoCandidates(member));
   card.appendChild(photo);
 
