@@ -132,7 +132,6 @@
   .people-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 20px; }
   .person-card { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 14px; box-shadow: 0 3px 12px rgba(0,0,0,0.04); }
   .person-photo { width: min(100%, 240px); aspect-ratio: 1/1; border-radius: 8px; object-fit: cover; object-position: center top; border: 1px solid var(--border); margin: 0 auto 12px; background: #f2f2f2; }
-  .person-photo-small { width: min(90%, 216px); }
   .person-avatar { width: min(100%, 240px); aspect-ratio: 1/1; border-radius: 8px; background: linear-gradient(135deg, #e8d5a3, var(--crimson-light)); margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; font-family: 'EB Garamond', serif; font-size: 2rem; color: #fff; font-weight: 700; }
   .person-card h4 { font-size: 1rem; font-weight: 700; margin-bottom: 6px; color: #1f1f1f; }
   .person-meta { font-size: 0.82rem; color: #333; line-height: 1.5; margin-bottom: 4px; }
@@ -1422,28 +1421,6 @@ function memberPhotoCandidates(member) {
   ].filter(Boolean);
 }
 
-function useSmallerPhoto(member) {
-  const smallerPhotoNames = new Set([
-    '刘淑敏',
-    '曾雅琳',
-    '杨华岳'
-  ]);
-  return smallerPhotoNames.has(member.name);
-}
-
-function memberPhotoSize(member) {
-  const sizeMap = {
-    '种亚楠': 70,
-    '钟亚楠': 70,
-    '王鹏': 80,
-    '万鹏': 80,
-    '田姝颖': 80,
-    '高繁': 80,
-    '吴祺祺': 90
-  };
-  return sizeMap[member.name] || null;
-}
-
 function memberPhotoPosition(member) {
   const positionMap = {
     '钟明洁': 'center 28%',
@@ -1483,13 +1460,6 @@ function createPersonCard(member, sectionTitle) {
 
   const photo = document.createElement('img');
   photo.className = 'person-photo';
-  const customPhotoSize = memberPhotoSize(member);
-  if (customPhotoSize) {
-    const maxWidthPx = Math.round((240 * customPhotoSize) / 100);
-    photo.style.width = `min(${customPhotoSize}%, ${maxWidthPx}px)`;
-  } else if (useSmallerPhoto(member)) {
-    photo.classList.add('person-photo-small');
-  }
   photo.alt = `${member.name} photo`;
   photo.style.objectPosition = memberPhotoPosition(member);
   attachMemberImage(photo, memberPhotoCandidates(member));
