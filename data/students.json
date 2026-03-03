@@ -1,259 +1,287 @@
 {
   "meta": {
-    "source_file": "课题组成员信息.pdf",
+    "source_file": "Lab member information.pdf",
     "notes": [
-      "photo 字段为预留字段（PDF 内头像为图片，未在此自动提取路径）。",
-      "Alumni 与 Graduate 的分界按 PDF 中的标题页（Alumni/Graduate）划分。"
+      "Field `photo` is reserved (profile photos in the source PDF were not automatically extracted as paths).",
+      "The boundary between Alumni and Graduate follows the section headers in the source PDF (Alumni/Graduate)."
     ]
   },
   "Alumni": [
     {
       "year": "2019",
       "degree": "PhD",
-      "name": "杜瑞安",
+      "name": "Ruian Du（杜瑞安）",
       "email": "1120934818@qq.com",
-      "research": "电催化二氧化碳还原",
-      "undergraduate_school": "江西理工大学",
-      "photo": ""
+      "research": "Electrocatalytic CO2 reduction",
+      "undergraduate_school": "Jiangxi University of Science and Technology",
+      "photo": "",
+      "name_zh": "杜瑞安"
     },
     {
       "year": "2020",
       "degree": "PhD",
-      "name": "吴祺祺",
+      "name": "Qiqi Wu（吴祺祺）",
       "email": "gdutwqq@126.com",
-      "research": "电催化二氧化碳还原",
-      "undergraduate_school": "广东工业大学",
-      "photo": ""
+      "research": "Electrocatalytic CO2 reduction",
+      "undergraduate_school": "Guangdong University of Technology",
+      "photo": "",
+      "name_zh": "吴祺祺"
     },
     {
       "year": "2020",
       "degree": "PhD",
-      "name": "王鹏",
+      "name": "Peng Wang（王鹏）",
       "email": "835042495@qq.com",
-      "research": "电化学二氧化碳捕获，还原；电化学电解质回收与产物分离",
-      "undergraduate_school": "安徽师范大学",
-      "photo": ""
+      "research": "Electrochemical CO2 capture and reduction; electrochemical electrolyte recovery and product separation",
+      "undergraduate_school": "Anhui Normal University",
+      "photo": "",
+      "name_zh": "王鹏"
     },
     {
       "year": "2020",
       "degree": "PhD",
-      "name": "种亚楠",
+      "name": "Yanan Chong（种亚楠）",
       "email": "cyn971218@126.com",
-      "research": "无机材料的表界面改性及其催化行为研究",
-      "undergraduate_school": "西北大学",
-      "photo": ""
+      "research": "Interfacial/surface modification of inorganic materials and their catalytic behavior",
+      "undergraduate_school": "Northwest University",
+      "photo": "",
+      "name_zh": "种亚楠"
     },
     {
       "year": "2020",
       "degree": "Master",
-      "name": "刘人凤",
+      "name": "Renfeng Liu（刘人凤）",
       "email": "970763169@qq.com",
-      "research": "电催化有机小分子增值转化",
-      "undergraduate_school": "南昌大学",
-      "photo": ""
+      "research": "Electrocatalytic valorization of small organic molecules",
+      "undergraduate_school": "Nanchang University",
+      "photo": "",
+      "name_zh": "刘人凤"
     },
     {
       "year": "2021",
       "degree": "PhD",
-      "name": "李逸飞",
+      "name": "Yifei Li（李逸飞）",
       "email": "545500127@qq.com",
-      "research": "钴基光热催化剂的表界面设计及其在VOCs光热催化降解中的应用",
-      "undergraduate_school": "华南农业大学",
-      "photo": ""
+      "research": "Interfacial/surface design of cobalt-based photothermal catalysts and their application in photothermal VOC degradation",
+      "undergraduate_school": "South China Agricultural University",
+      "photo": "",
+      "name_zh": "李逸飞"
     },
     {
       "year": "2021",
       "degree": "PhD",
-      "name": "李正健",
+      "name": "Zhengjian Li（李正健）",
       "email": "773848474@qq.com",
-      "research": "多相催化C1分子转化和甲基环已烷脱氢",
-      "undergraduate_school": "湖南农业大学",
-      "photo": ""
+      "research": "Heterogeneous catalytic conversion of C1 molecules and methylcyclohexane dehydrogenation",
+      "undergraduate_school": "Hunan Agricultural University",
+      "photo": "",
+      "name_zh": "李正健"
     },
     {
       "year": "2021",
       "degree": "PhD",
-      "name": "林家瑾",
+      "name": "Jiajin Lin（林家瑾）",
       "email": "1434014029@qq.com",
-      "research": "铂基合金催化的可控制备及其催化氧化性能和机理研究",
-      "undergraduate_school": "东莞理工大学",
-      "photo": ""
+      "research": "Controlled synthesis of Pt-based alloy catalysts and studies on catalytic oxidation performance and mechanisms",
+      "undergraduate_school": "Dongguan University of Technology",
+      "photo": "",
+      "name_zh": "林家瑾"
     },
     {
       "year": "2021",
       "degree": "Master",
-      "name": "古文蕾",
+      "name": "Wenlei Gu（古文蕾）",
       "email": "949518662@qq.com",
-      "research": "功能性亚纳米催化剂的制备",
-      "undergraduate_school": "华南师范大学",
-      "photo": ""
+      "research": "Synthesis of functional sub-nanometer catalysts",
+      "undergraduate_school": "South China Normal University",
+      "photo": "",
+      "name_zh": "古文蕾"
     },
     {
       "year": "2021",
       "degree": "PhD",
-      "name": "刘道儒",
+      "name": "Daoru Liu（刘道儒）",
       "email": "liudaoru@foxmail.com",
-      "research": "小分子烷烃脱氢、重整",
-      "undergraduate_school": "河南师范大学",
-      "photo": ""
+      "research": "Dehydrogenation and reforming of light alkanes",
+      "undergraduate_school": "Henan Normal University",
+      "photo": "",
+      "name_zh": "刘道儒"
     },
     {
       "year": "2021",
       "degree": "PhD",
-      "name": "裴安",
+      "name": "An Pei（裴安）",
       "email": "anpei03@foxmail.com",
-      "research": "金属-载体界面电/热催化、电化学反应工程",
-      "undergraduate_school": "江西理工大学",
-      "photo": ""
+      "research": "Electro/thermal catalysis at metal-support interfaces and electrochemical reaction engineering",
+      "undergraduate_school": "Jiangxi University of Science and Technology",
+      "photo": "",
+      "name_zh": "裴安"
     },
     {
       "year": "2022",
       "degree": "Master",
-      "name": "钟明洁",
+      "name": "Mingjie Zhong（钟明洁）",
       "email": "1017392291@qq.com",
-      "research": "VOCs催化氧化",
-      "undergraduate_school": "南京理工大学",
-      "photo": ""
+      "research": "Catalytic oxidation of VOCs",
+      "undergraduate_school": "Nanjing University of Science and Technology",
+      "photo": "",
+      "name_zh": "钟明洁"
     },
     {
       "year": "2022",
       "degree": "Master",
-      "name": "陈兆熙",
+      "name": "Zhaoxi Chen（陈兆熙）",
       "email": "2437084023@qq.com",
-      "research": "聚酯碱解产物的电化学分离及其催化转化研究",
-      "undergraduate_school": "东莞理工学院",
-      "photo": ""
+      "research": "Electrochemical separation and catalytic conversion of alkaline polyester hydrolysis products",
+      "undergraduate_school": "Dongguan Institute of Technology",
+      "photo": "",
+      "name_zh": "陈兆熙"
     },
     {
       "year": "2022",
       "degree": "Master",
-      "name": "田姝颖",
+      "name": "Shuying Tian（田姝颖）",
       "email": "shuying.tian@163.com",
-      "research": "热催化降解聚苯乙烯",
-      "undergraduate_school": "东南大学",
-      "photo": ""
+      "research": "Thermocatalytic degradation of polystyrene",
+      "undergraduate_school": "Southeast University",
+      "photo": "",
+      "name_zh": "田姝颖"
     },
     {
       "year": "2022",
       "degree": "Master",
-      "name": "高繁",
+      "name": "Fan Gao（高繁）",
       "email": "1486004151@qq.com",
-      "research": "机器学习辅助纳米颗粒合成与催化剂优化的数据自驱动系统构建",
-      "undergraduate_school": "广州大学",
-      "photo": ""
+      "research": "Data-driven systems for machine-learning-assisted nanoparticle synthesis and catalyst optimization",
+      "undergraduate_school": "Guangzhou University",
+      "photo": "",
+      "name_zh": "高繁"
     }
   ],
   "Graduate": {
     "2022": [
       {
         "degree": "PhD",
-        "name": "郑远杰",
+        "name": "Yuanjie Zheng（郑远杰）",
         "email": "1363763816@qq.com",
-        "research": "电催化氧气还原产过氧化氢的催化剂设计、机理研究、及其下游应用拓展",
-        "undergraduate_school": "暨南大学",
-        "photo": ""
+        "research": "Catalyst design and mechanistic studies for electrocatalytic oxygen reduction to hydrogen peroxide, and downstream application development",
+        "undergraduate_school": "Jinan University",
+        "photo": "",
+        "name_zh": "郑远杰"
       },
       {
         "degree": "PhD",
-        "name": "杨金",
+        "name": "Jin Yang（杨金）",
         "email": "Yangjin_0127@163.com",
-        "research": "金属氧化物表界面调控用于CO催化氧化",
-        "undergraduate_school": "东华理工大学",
-        "photo": ""
+        "research": "Interfacial/surface regulation of metal oxides for catalytic CO oxidation",
+        "undergraduate_school": "East China University of Technology",
+        "photo": "",
+        "name_zh": "杨金"
       },
       {
         "degree": "PhD",
-        "name": "戴晶",
+        "name": "Jing Dai（戴晶）",
         "email": "1713534357@qq.com",
-        "research": "聚烯烃塑料的热催化降解",
-        "undergraduate_school": "湖南文理学院",
-        "photo": ""
+        "research": "Thermocatalytic degradation of polyolefin plastics",
+        "undergraduate_school": "Hunan University of Arts and Science",
+        "photo": "",
+        "name_zh": "戴晶"
       }
     ],
     "2023": [
       {
         "degree": "PhD",
-        "name": "张改革",
+        "name": "Gaige Zhang（张改革）",
         "email": "ZGG82@outlook.com",
-        "research": "废旧电池回收，高效电催化剂制备",
-        "undergraduate_school": "桂林理工大学",
-        "photo": ""
+        "research": "Spent battery recycling and preparation of high-efficiency electrocatalysts",
+        "undergraduate_school": "Guilin University of Technology",
+        "photo": "",
+        "name_zh": "张改革"
       },
       {
         "degree": "PhD",
-        "name": "刘淑敏",
+        "name": "Shumin Liu（刘淑敏）",
         "email": "470344876@qq.com",
-        "research": "亚纳米级金属/氧化物的界面构筑及其催化性能研究",
-        "undergraduate_school": "忻州师范学院",
-        "photo": ""
+        "research": "Interfacial construction of sub-nanometer metal/oxide systems and their catalytic performance",
+        "undergraduate_school": "Xinzhou Teachers University",
+        "photo": "",
+        "name_zh": "刘淑敏"
       },
       {
         "degree": "PhD",
-        "name": "覃琪珍",
+        "name": "Qizhen Qin（覃琪珍）",
         "email": "qin_qizhen@163.com",
-        "research": "金属基催化剂结构调控及其在生物质5-羟甲基糠醛升级转化中的应用",
-        "undergraduate_school": "大连理工大学",
-        "photo": ""
+        "research": "Structural regulation of metal-based catalysts and their application in upgrading conversion of biomass-derived 5-hydroxymethylfurfural",
+        "undergraduate_school": "Dalian University of Technology",
+        "photo": "",
+        "name_zh": "覃琪珍"
       },
       {
         "degree": "Master",
-        "name": "王浩南",
+        "name": "Haonan Wang（王浩南）",
         "email": "haonan_wang1@163.com",
-        "research": "电催化二氧化碳还原",
-        "undergraduate_school": "辽宁石油化工大学",
-        "photo": ""
+        "research": "Electrocatalytic CO2 reduction",
+        "undergraduate_school": "Liaoning Petrochemical University",
+        "photo": "",
+        "name_zh": "王浩南"
       },
       {
         "degree": "Master",
-        "name": "周维玮",
+        "name": "Weiwei Zhou（周维玮）",
         "email": "wwkaty@163.com",
-        "research": "电催化生物质高效转化",
-        "undergraduate_school": "大连海事大学",
-        "photo": ""
+        "research": "Efficient electrocatalytic biomass conversion",
+        "undergraduate_school": "Dalian Maritime University",
+        "photo": "",
+        "name_zh": "周维玮"
       },
       {
         "degree": "Master",
-        "name": "刘方政",
+        "name": "Fangzheng Liu（刘方政）",
         "email": "2452919204@qq.com",
-        "research": "AI辅助自动化平台设计高性能催化剂",
-        "undergraduate_school": "河南大学",
-        "photo": ""
+        "research": "AI-assisted automated platform for designing high-performance catalysts",
+        "undergraduate_school": "Henan University",
+        "photo": "",
+        "name_zh": "刘方政"
       },
       {
         "degree": "Master",
-        "name": "孙沛霖",
+        "name": "Peilin Sun（孙沛霖）",
         "email": "421749383@qq.com",
-        "research": "电催化ORR",
-        "undergraduate_school": "西南大学",
-        "photo": ""
+        "research": "Electrocatalytic oxygen reduction reaction (ORR)",
+        "undergraduate_school": "Southwest University",
+        "photo": "",
+        "name_zh": "孙沛霖"
       },
       {
         "degree": "Master",
-        "name": "秦浩航",
+        "name": "Haohang Qin（秦浩航）",
         "email": "183409031@qq.com",
-        "research": "小分子氧化",
-        "undergraduate_school": "西北农林科技大学",
-        "photo": ""
+        "research": "Small-molecule oxidation",
+        "undergraduate_school": "Northwest A&F University",
+        "photo": "",
+        "name_zh": "秦浩航"
       }
     ],
     "2024": [
       {
         "degree": "PhD",
-        "name": "曾雅琳",
+        "name": "Yalin Zeng（曾雅琳）",
         "email": "840499225@qq.com",
-        "research": "中性电解液体系醇醛小分子的电化学精准转化与器件设计",
-        "undergraduate_school": "桂林理工大学",
-        "photo": ""
+        "research": "Precise electrochemical conversion of alcohol/aldehyde small molecules in neutral electrolytes and device design",
+        "undergraduate_school": "Guilin University of Technology",
+        "photo": "",
+        "name_zh": "曾雅琳"
       }
     ],
     "2025": [
       {
         "degree": "PhD",
-        "name": "杨华岳",
+        "name": "Huayue Yang（杨华岳）",
         "email": "yzumilight@outlook.com",
-        "research": "多相催化反应机理的第一性原理（DFT）理论计算研究；分子反应动力学探索",
-        "undergraduate_school": "长安大学",
-        "photo": ""
+        "research": "First-principles (DFT) studies of heterogeneous catalytic reaction mechanisms; exploration of molecular reaction kinetics",
+        "undergraduate_school": "Chang'an University",
+        "photo": "",
+        "name_zh": "杨华岳"
       }
     ]
   }
