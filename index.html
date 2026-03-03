@@ -127,12 +127,18 @@
   .exp-desc { font-size: 0.88rem; line-height: 1.65; color: #444; }
 
   /* PEOPLE */
-  .people-section-title { font-family: 'EB Garamond', serif; font-size: 1.1rem; color: var(--crimson); border-bottom: 1px solid var(--border); padding-bottom: 8px; margin: 32px 0 20px; }
-  .people-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 18px; }
-  .person-card { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 22px 14px; text-align: center; }
-  .person-avatar { width: 68px; height: 68px; border-radius: 50%; background: linear-gradient(135deg, #e8d5a3, var(--crimson-light)); margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; font-family: 'EB Garamond', serif; font-size: 1.3rem; color: #fff; font-weight: 700; }
-  .person-card h4 { font-size: 0.92rem; font-weight: 600; margin-bottom: 4px; }
-  .person-card p { font-size: 0.76rem; color: var(--text-muted); }
+  .people-section-title { font-family: 'EB Garamond', serif; font-size: 1.2rem; color: var(--crimson); border-bottom: 1px solid var(--border); padding-bottom: 8px; margin: 34px 0 16px; }
+  .people-year-label { font-size: 0.86rem; color: var(--text-muted); margin: 6px 0 10px; }
+  .people-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 20px; }
+  .person-card { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 14px; box-shadow: 0 3px 12px rgba(0,0,0,0.04); }
+  .person-photo { width: 100%; aspect-ratio: 1/1; border-radius: 8px; object-fit: cover; object-position: center top; border: 1px solid var(--border); margin-bottom: 12px; background: #f2f2f2; }
+  .person-avatar { width: 100%; aspect-ratio: 1/1; border-radius: 8px; background: linear-gradient(135deg, #e8d5a3, var(--crimson-light)); margin: 0 0 12px; display: flex; align-items: center; justify-content: center; font-family: 'EB Garamond', serif; font-size: 2rem; color: #fff; font-weight: 700; }
+  .person-card h4 { font-size: 1rem; font-weight: 700; margin-bottom: 6px; color: #1f1f1f; }
+  .person-meta { font-size: 0.82rem; color: #333; line-height: 1.5; margin-bottom: 4px; }
+  .person-meta strong { color: var(--crimson-dark); font-weight: 600; }
+  .person-meta a { color: var(--crimson); text-decoration: none; }
+  .person-meta a:hover { text-decoration: underline; }
+  .people-note { font-size:0.82rem;color:var(--text-muted);margin-top:24px; }
 
   /* RESEARCH */
   .research-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px,1fr)); gap: 24px; }
@@ -230,7 +236,7 @@
   <nav>
     <a class="active" onclick="showPage('home',this)">⌂ Home</a>
     <a onclick="showPage('pi',this)">👤 People</a>
-    <a href="members.html">👥 Members</a>
+
     <a onclick="showPage('research',this)">🔬 Research</a>
     <a onclick="showPage('projects',this)">📁 Projects</a>
     <a onclick="showPage('publications',this)">📄 Publications</a>
@@ -336,19 +342,8 @@
       </div>
     </div>
 
-    <div class="people-section-title">Postdoctoral Researchers</div>
-    <div class="people-grid">
-      <div class="person-card"><div class="person-avatar">?</div><h4>To be updated</h4><p>Postdoctoral Fellow</p></div>
-    </div>
-    <div class="people-section-title">Ph.D. Students</div>
-    <div class="people-grid">
-      <div class="person-card"><div class="person-avatar">?</div><h4>To be updated</h4><p>Ph.D. Student</p></div>
-    </div>
-    <div class="people-section-title">Master's Students</div>
-    <div class="people-grid">
-      <div class="person-card"><div class="person-avatar">?</div><h4>To be updated</h4><p>Master's Student</p></div>
-    </div>
-    <p style="font-size:0.82rem;color:var(--text-muted);margin-top:24px">* Please update team member information as needed.</p>
+    <div id="people-sections"></div>
+    <p class="people-note">* Student information is shown directly on this page. Ph.D., Master's, and Undergraduate sections are grouped by entry year without collapsible panels.</p>
   </div>
 </div>
 
@@ -1400,6 +1395,172 @@ function bindNewsSync() {
   observer.observe(src, { childList: true, subtree: true, characterData: true });
 }
 
+
+
+function memberPhotoCandidates(member) {
+  const overridePhoto = {
+    '杨金': 'assets/img/people/PhD_郑远杰.png',
+    '郑远杰': 'assets/img/people/PhD_杨金.jpeg'
+  };
+  const encodedName = encodeURIComponent(member.name || '');
+  const swapped = overridePhoto[member.name];
+  const baseName = `assets/img/people/${encodedName}`;
+  return [
+    swapped,
+    member.photo,
+    `${baseName}.png`,
+    `${baseName}.jpg`,
+    `${baseName}.jpeg`,
+    `assets/img/people/${member.year || ''}_${member.degree || ''}_${member.name}.png`,
+    `assets/img/people/${member.year || ''}_${member.degree || ''}_${member.name}.jpg`,
+    `assets/img/people/${member.year || ''}_${member.degree || ''}_${member.name}.jpeg`,
+    `assets/img/people/${member.degree || ''}_${member.name}.png`,
+    `assets/img/people/${member.degree || ''}_${member.name}.jpg`,
+    `assets/img/people/${member.degree || ''}_${member.name}.jpeg`
+  ].filter(Boolean);
+}
+
+function attachMemberImage(img, candidates) {
+  const fallback = 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(
+    '<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400"><rect width="100%" height="100%" fill="#ececec"/><text x="50%" y="52%" dominant-baseline="middle" text-anchor="middle" font-size="28" fill="#9a9a9a">No Photo</text></svg>'
+  );
+  let idx = 0;
+  const next = () => {
+    if (idx >= candidates.length) {
+      img.onerror = null;
+      img.src = fallback;
+      return;
+    }
+    img.src = candidates[idx++];
+  };
+  img.onerror = next;
+  next();
+}
+
+function roleLabel(member, sectionTitle) {
+  if (sectionTitle === 'Postdoctoral Researchers') return 'Postdoctoral Researcher';
+  if (sectionTitle === 'Ph.D. Students') return 'Ph.D. Student';
+  if (sectionTitle === "Master's Students") return "Master's Student";
+  if (sectionTitle === 'Undergraduate Students') return 'Undergraduate Student';
+  return `${member.degree || 'Graduate'} Alumni`;
+}
+
+function createPersonCard(member, sectionTitle) {
+  const card = document.createElement('article');
+  card.className = 'person-card';
+
+  const photo = document.createElement('img');
+  photo.className = 'person-photo';
+  photo.alt = `${member.name} photo`;
+  attachMemberImage(photo, memberPhotoCandidates(member));
+  card.appendChild(photo);
+
+
+  const name = document.createElement('h4');
+  name.textContent = member.name;
+  card.appendChild(name);
+
+  const role = document.createElement('p');
+  role.className = 'person-meta';
+  role.innerHTML = `<strong>Role:</strong> ${roleLabel(member, sectionTitle)}`;
+  card.appendChild(role);
+
+  if (member.year) {
+    const year = document.createElement('p');
+    year.className = 'person-meta';
+    year.innerHTML = `<strong>Entry Year:</strong> ${member.year}`;
+    card.appendChild(year);
+  }
+
+  const research = document.createElement('p');
+  research.className = 'person-meta';
+  research.innerHTML = `<strong>Research:</strong> ${member.research || '-'}`;
+  card.appendChild(research);
+
+  const school = document.createElement('p');
+  school.className = 'person-meta';
+  school.innerHTML = `<strong>Undergraduate Institution:</strong> ${member.undergraduate_school || '-'}`;
+  card.appendChild(school);
+
+  const email = document.createElement('p');
+  email.className = 'person-meta';
+  email.innerHTML = `<strong>Email:</strong> <a href="mailto:${member.email || ''}">${member.email || '-'}</a>`;
+  card.appendChild(email);
+
+  return card;
+}
+
+function appendPeopleSection(root, title, members, splitByYear) {
+  const sectionTitle = document.createElement('div');
+  sectionTitle.className = 'people-section-title';
+  sectionTitle.textContent = title;
+  root.appendChild(sectionTitle);
+
+  if (!members.length) {
+    const empty = document.createElement('p');
+    empty.className = 'person-meta';
+    empty.textContent = 'To be updated.';
+    root.appendChild(empty);
+    return;
+  }
+
+  if (splitByYear) {
+    const grouped = members.reduce((acc, m) => {
+      const key = m.year || 'Unknown';
+      (acc[key] ||= []).push(m);
+      return acc;
+    }, {});
+    Object.keys(grouped).sort((a, b) => Number(a) - Number(b)).forEach((year) => {
+      const label = document.createElement('div');
+      label.className = 'people-year-label';
+      label.textContent = `Entry Year ${year}`;
+      root.appendChild(label);
+
+      const grid = document.createElement('div');
+      grid.className = 'people-grid';
+      grouped[year].forEach((m) => grid.appendChild(createPersonCard(m, title)));
+      root.appendChild(grid);
+    });
+    return;
+  }
+
+  const grid = document.createElement('div');
+  grid.className = 'people-grid';
+  members.forEach((m) => grid.appendChild(createPersonCard(m, title)));
+  root.appendChild(grid);
+}
+
+async function loadPeopleData() {
+  const root = document.getElementById('people-sections');
+  if (!root) return;
+
+  try {
+    const res = await fetch('data/students.json');
+    if (!res.ok) throw new Error(`Failed to load students data (${res.status})`);
+    const data = await res.json();
+
+    const alumni = data.Alumni || [];
+    const graduateByYear = data.Graduate || {};
+    const graduate = Object.keys(graduateByYear).sort((a,b)=>Number(a)-Number(b)).flatMap((year) =>
+      (graduateByYear[year] || []).map((m) => ({ ...m, year }))
+    );
+
+    const postdocs = alumni.filter((m) => m.name === '刘道儒').map((m) => ({ ...m, degree: 'Postdoc' }));
+    const alumniFiltered = alumni.filter((m) => m.name !== '刘道儒');
+    const phd = graduate.filter((m) => m.degree === 'PhD');
+    const masters = graduate.filter((m) => m.degree === 'Master');
+    const undergrads = graduate.filter((m) => m.degree === 'Undergraduate');
+
+    appendPeopleSection(root, 'Postdoctoral Researchers', postdocs, false);
+    appendPeopleSection(root, 'Ph.D. Students', phd, true);
+    appendPeopleSection(root, "Master's Students", masters, true);
+    appendPeopleSection(root, 'Undergraduate Students', undergrads, true);
+    appendPeopleSection(root, 'Alumni', alumniFiltered, false);
+  } catch (err) {
+    root.innerHTML = `<p class="person-meta" style="color:#9f1d1d">Unable to load student information: ${err.message}</p>`;
+  }
+}
+
 function showPage(id, el) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
@@ -1412,6 +1573,7 @@ function showPage(id, el) {
 document.addEventListener('DOMContentLoaded', function() {
   syncNews();
   bindNewsSync();
+  loadPeopleData();
   showPage('home', document.querySelector('nav a'));
 });
 </script>
