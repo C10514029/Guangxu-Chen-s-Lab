@@ -282,6 +282,51 @@
         "undergraduate_school": "Chang'an University",
         "photo": "",
         "name_zh": "杨华岳"
+      },
+      {
+        "degree": "Master",
+        "name": "Yuting Pan（潘燏婷）",
+        "email": "714562793@qq.com",
+        "research": "AI-assisted automated platform for nanomaterial synthesis",
+        "undergraduate_school": "China University of Geosciences, Wuhan",
+        "photo": "assets/img/people/Master_潘燏婷.jpeg",
+        "name_zh": "潘燏婷"
+      },
+      {
+        "degree": "Master",
+        "name": "Tuo Wu（吴拓）",
+        "email": "b269776918@gmail.com",
+        "research": "PET plastic degradation product recycling and utilization",
+        "undergraduate_school": "Central South University",
+        "photo": "assets/img/people/Master_吴拓.jpeg",
+        "name_zh": "吴拓"
+      },
+      {
+        "degree": "Master",
+        "name": "Yulu Liu（刘雨露）",
+        "email": "2389519292@qq.com",
+        "research": "Carbon dioxide capture",
+        "undergraduate_school": "Henan Normal University",
+        "photo": "assets/img/people/Master_刘雨露.jpeg",
+        "name_zh": "刘雨露"
+      },
+      {
+        "degree": "Master",
+        "name": "Luxin Guo（郭鲁欣）",
+        "email": "2847961192@qq.com",
+        "research": "Thermal catalytic degradation of plastics",
+        "undergraduate_school": "Yangtze University",
+        "photo": "assets/img/people/Master_郭鲁欣.jpeg",
+        "name_zh": "郭鲁欣"
+      },
+      {
+        "degree": "Master",
+        "name": "Zhihang Zhang（张智航）",
+        "email": "13896595467@163.com",
+        "research": "Small-molecule oxidation",
+        "undergraduate_school": "China University of Mining and Technology",
+        "photo": "assets/img/people/Master_张智航.jpeg",
+        "name_zh": "张智航"
       }
     ]
   }
