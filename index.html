@@ -198,12 +198,19 @@
   .salary-table tr:nth-child(even) td { background: #faf5ef; }
 
   /* CONTACT */
-  .contact-grid { display: grid; grid-template-columns: 1fr; gap: 24px; max-width: 760px; }
+  .contact-grid { display: grid; grid-template-columns: minmax(280px, 1fr) minmax(320px, 1fr); gap: 24px; max-width: 980px; align-items: start; }
   .contact-info h3 { font-family: 'EB Garamond', serif; font-size: 1.2rem; margin-bottom: 20px; color: var(--crimson-dark); }
   .contact-row { display: flex; gap: 14px; margin-bottom: 18px; align-items: start; }
   .contact-icon { font-size: 1rem; margin-top: 2px; color: var(--crimson); min-width: 20px; }
   .contact-row p { font-size: 0.9rem; line-height: 1.7; color: #444; }
-  .map-box { background: linear-gradient(135deg, #f5ede3, #e8d5a3); border-radius: 10px; height: 280px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; border: 1px solid var(--border); color: var(--text-muted); font-size: 0.88rem; }
+  .visitor-map-panel { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 16px; box-shadow: 0 4px 16px rgba(0,0,0,0.05); }
+  .visitor-map-title { font-family: 'EB Garamond', serif; font-size: 1.1rem; color: var(--crimson-dark); margin-bottom: 10px; }
+  .world-map-wrap { position: relative; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); background: linear-gradient(180deg, #edf5ff 0%, #f7fbff 100%); }
+  .world-map-image { width: 100%; display: block; aspect-ratio: 2 / 1; object-fit: cover; }
+  .visitor-dot { position: absolute; width: 12px; height: 12px; border-radius: 50%; background: #d22020; border: 2px solid #fff; transform: translate(-50%, -50%); box-shadow: 0 0 0 6px rgba(210,32,32,0.25); opacity: 0; transition: opacity 0.25s ease; pointer-events: none; }
+  .visitor-dot.visible { opacity: 1; }
+  .visitor-map-meta { margin-top: 12px; font-size: 0.85rem; color: #555; line-height: 1.7; }
+  .visit-count { margin-top: 8px; font-size: 0.9rem; color: var(--crimson-dark); font-weight: 600; }
 
   footer { background: var(--crimson-dark); color: rgba(255,255,255,0.6); text-align: center; padding: 24px; font-size: 0.8rem; margin-top: 60px; }
   footer strong { color: rgba(255,255,255,0.9); }
@@ -1313,7 +1320,7 @@
         </div>
         <div class="contact-row">
           <span class="contact-icon">✉️</span>
-          <div><p>Email: <a href="mailto:cgx08@scut.edu.cn">cgx08@scut.edu.cn</a></p></div>
+          <div><p>Email: <a href="mailto:cgx08@scut.edu.cn">cgx08(at)scut.edu.cn</a></p></div>
         </div>
         <div class="contact-row">
           <span class="contact-icon">📍</span>
@@ -1322,6 +1329,20 @@
             <p style="margin-top:6px;font-size:0.82rem;color:var(--text-muted)">No. 382 Outer Ring East Road, Guangzhou University Town<br>Panyu District, Guangzhou 510006, China</p>
           </div>
         </div>
+      </div>
+      <div class="visitor-map-panel">
+        <div class="visitor-map-title">Website Visitor Location</div>
+        <div class="world-map-wrap">
+          <img
+            id="world-map-image"
+            class="world-map-image"
+            src="https://upload.wikimedia.org/wikipedia/commons/8/80/World_map_-_low_resolution.svg"
+            alt="World map for visitor IP display"
+          >
+          <div id="visitor-dot" class="visitor-dot" aria-hidden="true"></div>
+        </div>
+        <div class="visitor-map-meta" id="visitor-location-status">定位中（Locating visitor IP...）</div>
+        <div class="visit-count" id="visit-counter">访问次数：加载中...</div>
       </div>
     </div>
   </div>
@@ -1584,6 +1605,54 @@ async function loadPeopleData() {
   }
 }
 
+function latLonToMapPosition(lat, lon) {
+  const x = ((lon + 180) / 360) * 100;
+  const y = ((90 - lat) / 180) * 100;
+  return {
+    x: Math.min(99, Math.max(1, x)),
+    y: Math.min(99, Math.max(1, y))
+  };
+}
+
+async function loadVisitorMap() {
+  const dot = document.getElementById('visitor-dot');
+  const locationStatus = document.getElementById('visitor-location-status');
+  const visitCounter = document.getElementById('visit-counter');
+  if (!dot || !locationStatus || !visitCounter) return;
+
+  try {
+    const ipRes = await fetch('https://ipapi.co/json/');
+    if (!ipRes.ok) throw new Error(`IP API unavailable (${ipRes.status})`);
+    const ipData = await ipRes.json();
+    const lat = Number(ipData.latitude);
+    const lon = Number(ipData.longitude);
+
+    if (!Number.isFinite(lat) || !Number.isFinite(lon)) {
+      throw new Error('Missing latitude/longitude');
+    }
+
+    const pos = latLonToMapPosition(lat, lon);
+    dot.style.left = `${pos.x}%`;
+    dot.style.top = `${pos.y}%`;
+    dot.classList.add('visible');
+
+    const city = ipData.city || 'Unknown city';
+    const country = ipData.country_name || 'Unknown country';
+    locationStatus.textContent = `当前访客大致位置：${city}, ${country}（IP: ${ipData.ip || 'N/A'}）`;
+  } catch (error) {
+    locationStatus.textContent = `无法定位访客 IP：${error.message}`;
+  }
+
+  try {
+    const counterRes = await fetch('https://api.countapi.xyz/hit/guangxu-chen-lab/homepage');
+    if (!counterRes.ok) throw new Error(`Counter API unavailable (${counterRes.status})`);
+    const counterData = await counterRes.json();
+    visitCounter.textContent = `访问次数（Visits）：${counterData.value}`;
+  } catch (error) {
+    visitCounter.textContent = `访问次数加载失败：${error.message}`;
+  }
+}
+
 function showPage(id, el) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
@@ -1597,6 +1666,7 @@ document.addEventListener('DOMContentLoaded', function() {
   syncNews();
   bindNewsSync();
   loadPeopleData();
+  loadVisitorMap();
   showPage('home', document.querySelector('nav a'));
 });
 </script>
