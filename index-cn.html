@@ -81,7 +81,7 @@
   nav a:hover { color: var(--crimson); }
   nav a.active { color: var(--crimson); border-bottom-color: var(--crimson); font-weight: 600; }
 
-  .lang-switch { display: flex; justify-content: flex-end; gap: 10px; padding: 14px 40px 0; max-width: 1080px; margin: 0 auto; }
+  .lang-switch { position: absolute; top: calc(14px + 1cm); right: calc(40px + 82px + 24px + 12px); display: flex; justify-content: flex-end; gap: 10px; z-index: 2; }
   .lang-switch a { text-decoration: none; border: 1px solid var(--border); color: var(--text-muted); padding: 6px 14px; border-radius: 999px; background: #fff; font-size: 0.84rem; font-weight: 600; transition: all 0.2s; }
   .lang-switch a:hover, .lang-switch a.active { background: var(--crimson); color: #fff; border-color: var(--crimson); }
 
@@ -242,7 +242,7 @@
     .site-header h1 { font-size: 1.4rem; }
     .scut-logo { height: 58px; width: 58px; }
     nav { padding: 0 10px; }
-    .lang-switch { padding: 12px 18px 0; }
+    .lang-switch { top: calc(8px + 0.45cm); right: calc(18px + 58px + 12px); gap: 8px; }
     .patent-stat-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   }
 </style>
@@ -250,12 +250,11 @@
 <body>
 
 
-<div class="lang-switch">
-  <a href="index.html">English</a>
-  <a href="index-cn.html" class="active">中文</a>
-</div>
-
 <div class="site-header">
+  <div class="lang-switch">
+    <a href="index.html">English</a>
+    <a href="index-cn.html" class="active">中文</a>
+  </div>
   <img src="assets/img/inline/inline-b992afe2b0c8.svg" alt="" class="motto-watermark">
   <div class="site-header-text">
     <h1>陈光需课题组</h1>
