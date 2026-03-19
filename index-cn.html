@@ -81,8 +81,10 @@
   nav a:hover { color: var(--crimson); }
   nav a.active { color: var(--crimson); border-bottom-color: var(--crimson); font-weight: 600; }
 
-  .lang-switch { position: absolute; top: calc(14px + 1cm); right: max(18px, calc(40px + 0.5cm)); display: flex; justify-content: flex-end; gap: 10px; z-index: 2; }
-  .lang-switch a { text-decoration: none; border: 1px solid var(--border); color: var(--text-muted); padding: 6px 14px; border-radius: 999px; background: #fff; font-size: 0.84rem; font-weight: 600; transition: all 0.2s; }
+  .lang-switch { --lang-gap: 10px; --english-width: 84px; --chinese-width: 60px; position: absolute; top: calc(14px + 1cm); right: max(18px, calc(40px + 0.5cm)); display: flex; justify-content: flex-end; gap: var(--lang-gap); z-index: 2; transform: translateX(calc(-1 * (var(--chinese-width) + var(--lang-gap)))); }
+  .lang-switch a { box-sizing: border-box; text-align: center; text-decoration: none; border: 1px solid var(--border); color: var(--text-muted); padding: 6px 14px; border-radius: 999px; background: #fff; font-size: 0.84rem; font-weight: 600; transition: all 0.2s; }
+  .lang-switch .lang-en { width: var(--english-width); position: relative; left: calc(var(--chinese-width) + var(--lang-gap)); }
+  .lang-switch .lang-zh { width: var(--chinese-width); position: relative; left: calc(-1 * (var(--english-width) + var(--lang-gap))); }
   .lang-switch a:hover, .lang-switch a.active { background: var(--crimson); color: #fff; border-color: var(--crimson); }
 
   .pub-subnav { display: flex; gap: 10px; flex-wrap: wrap; margin: 18px 0 28px; }
@@ -242,7 +244,7 @@
     .site-header h1 { font-size: 1.4rem; }
     .scut-logo { height: 58px; width: 58px; }
     nav { padding: 0 10px; }
-    .lang-switch { top: calc(8px + 0.45cm); right: max(12px, calc(18px + 2cm)); gap: 8px; }
+    .lang-switch { --lang-gap: 8px; top: calc(8px + 0.45cm); right: max(12px, calc(18px + 2cm)); }
     .patent-stat-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   }
 </style>
@@ -252,8 +254,8 @@
 
 <div class="site-header">
   <div class="lang-switch">
-    <a href="index.html">English</a>
-    <a href="index-cn.html" class="active">中文</a>
+    <a href="index.html" class="lang-en">English</a>
+    <a href="index-cn.html" class="lang-zh active">中文</a>
   </div>
   <img src="assets/img/inline/inline-b992afe2b0c8.svg" alt="" class="motto-watermark">
   <div class="site-header-text">
