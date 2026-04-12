@@ -237,6 +237,7 @@
 
   footer { background: var(--crimson-dark); color: rgba(255,255,255,0.6); text-align: center; padding: 24px; font-size: 0.8rem; margin-top: 60px; }
   footer strong { color: rgba(255,255,255,0.9); }
+  .footer-visit-count { margin-top: 10px; font-size: 0.92rem; color: #fff; font-weight: 700; letter-spacing: 0.02em; }
 
   @media (max-width: 760px) {
     .container { padding: 28px 18px; }
@@ -1381,6 +1382,7 @@
 <footer>
   <strong>陈光需课题组</strong> · 华南理工大学环境与能源学院<br>
   <span style="font-size:0.72rem;margin-top:4px;display:block">广州市番禺区广州大学城外环东路382号 · 510006 · cgx08(at)scut.edu.cn</span>
+  <div id="footer-visit-counter" class="footer-visit-count">访问次数：加载中...</div>
 </footer>
 
 <script>
@@ -1657,7 +1659,13 @@ async function loadVisitorMap() {
   const dot = document.getElementById('visitor-dot');
   const locationStatus = document.getElementById('visitor-location-status');
   const visitCounter = document.getElementById('visit-counter');
-  if (!dot || !locationStatus || !visitCounter) return;
+  const footerVisitCounter = document.getElementById('footer-visit-counter');
+  if (!dot || !locationStatus) return;
+
+  const updateVisitCountText = (text) => {
+    if (visitCounter) visitCounter.textContent = text;
+    if (footerVisitCounter) footerVisitCounter.textContent = text;
+  };
 
   try {
     const ipRes = await fetch('https://ipapi.co/json/');
@@ -1686,9 +1694,16 @@ async function loadVisitorMap() {
     const counterRes = await fetch('https://api.countapi.xyz/hit/guangxu-chen-lab/homepage');
     if (!counterRes.ok) throw new Error(`Counter API unavailable (${counterRes.status})`);
     const counterData = await counterRes.json();
-    visitCounter.textContent = `访问次数（Visits）：${counterData.value}`;
+    const countText = `访问次数（Visits）：${counterData.value}`;
+    localStorage.setItem('gx_lab_visit_count_zh', String(counterData.value));
+    updateVisitCountText(countText);
   } catch (error) {
-    visitCounter.textContent = `访问次数加载失败：${error.message}`;
+    const cachedValue = localStorage.getItem('gx_lab_visit_count_zh');
+    if (cachedValue) {
+      updateVisitCountText(`访问次数（Visits）：${cachedValue}`);
+    } else {
+      updateVisitCountText('访问次数：暂无数据');
+    }
   }
 }
 
