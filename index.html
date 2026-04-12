@@ -237,6 +237,7 @@
 
   footer { background: var(--crimson-dark); color: rgba(255,255,255,0.6); text-align: center; padding: 24px; font-size: 0.8rem; margin-top: 60px; }
   footer strong { color: rgba(255,255,255,0.9); }
+  .footer-visit-count { margin-top: 10px; font-size: 0.92rem; color: #fff; font-weight: 700; letter-spacing: 0.02em; }
 
   @media (max-width: 760px) {
     .container { padding: 28px 18px; }
@@ -1383,6 +1384,7 @@
 <footer>
   <strong>Guangxu Chen's Research Group</strong> · School of Environment and Energy · South China University of Technology<br>
   <span style="font-size:0.72rem;margin-top:4px;display:block">382 Outer Ring East Road, Guangzhou Higher Education Mega Center, Panyu District, Guangzhou 510006 · cgx08(at)scut.edu.cn</span>
+  <div id="footer-visit-counter" class="footer-visit-count">Visits: loading...</div>
 </footer>
 
 <script>
@@ -1659,7 +1661,13 @@ async function loadVisitorMap() {
   const dot = document.getElementById('visitor-dot');
   const locationStatus = document.getElementById('visitor-location-status');
   const visitCounter = document.getElementById('visit-counter');
-  if (!dot || !locationStatus || !visitCounter) return;
+  const footerVisitCounter = document.getElementById('footer-visit-counter');
+  if (!dot || !locationStatus) return;
+
+  const updateVisitCountText = (text) => {
+    if (visitCounter) visitCounter.textContent = text;
+    if (footerVisitCounter) footerVisitCounter.textContent = text;
+  };
 
   try {
     const ipRes = await fetch('https://ipapi.co/json/');
@@ -1688,9 +1696,19 @@ async function loadVisitorMap() {
     const counterRes = await fetch('https://api.countapi.xyz/hit/guangxu-chen-lab/homepage');
     if (!counterRes.ok) throw new Error(`Counter API unavailable (${counterRes.status})`);
     const counterData = await counterRes.json();
-    visitCounter.textContent = `Visits: ${counterData.value}`;
+    const countText = `Visits: ${counterData.value}`;
+    localStorage.setItem('gx_lab_visit_count_en', String(counterData.value));
+    updateVisitCountText(countText);
   } catch (error) {
-    visitCounter.textContent = `Unable to load visit count: ${error.message}`;
+    const cachedValue = localStorage.getItem('gx_lab_visit_count_en');
+    if (cachedValue) {
+      updateVisitCountText(`Visits: ${cachedValue}`);
+    } else {
+      const localFallbackKey = 'gx_lab_local_visit_count_en';
+      const localCount = Number(localStorage.getItem(localFallbackKey) || '0') + 1;
+      localStorage.setItem(localFallbackKey, String(localCount));
+      updateVisitCountText(`Visits: ${localCount}`);
+    }
   }
 }
 
