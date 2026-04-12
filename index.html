@@ -1662,7 +1662,12 @@ async function loadVisitorMap() {
   const locationStatus = document.getElementById('visitor-location-status');
   const visitCounter = document.getElementById('visit-counter');
   const footerVisitCounter = document.getElementById('footer-visit-counter');
-  if (!dot || !locationStatus || !visitCounter || !footerVisitCounter) return;
+  if (!dot || !locationStatus) return;
+
+  const updateVisitCountText = (text) => {
+    if (visitCounter) visitCounter.textContent = text;
+    if (footerVisitCounter) footerVisitCounter.textContent = text;
+  };
 
   try {
     const ipRes = await fetch('https://ipapi.co/json/');
@@ -1692,12 +1697,15 @@ async function loadVisitorMap() {
     if (!counterRes.ok) throw new Error(`Counter API unavailable (${counterRes.status})`);
     const counterData = await counterRes.json();
     const countText = `Visits: ${counterData.value}`;
-    visitCounter.textContent = countText;
-    footerVisitCounter.textContent = countText;
+    localStorage.setItem('gx_lab_visit_count_en', String(counterData.value));
+    updateVisitCountText(countText);
   } catch (error) {
-    const errorText = `Unable to load visit count: ${error.message}`;
-    visitCounter.textContent = errorText;
-    footerVisitCounter.textContent = errorText;
+    const cachedValue = localStorage.getItem('gx_lab_visit_count_en');
+    if (cachedValue) {
+      updateVisitCountText(`Visits: ${cachedValue}`);
+    } else {
+      updateVisitCountText('Visits: N/A');
+    }
   }
 }
 

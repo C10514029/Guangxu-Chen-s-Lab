@@ -1660,7 +1660,12 @@ async function loadVisitorMap() {
   const locationStatus = document.getElementById('visitor-location-status');
   const visitCounter = document.getElementById('visit-counter');
   const footerVisitCounter = document.getElementById('footer-visit-counter');
-  if (!dot || !locationStatus || !visitCounter || !footerVisitCounter) return;
+  if (!dot || !locationStatus) return;
+
+  const updateVisitCountText = (text) => {
+    if (visitCounter) visitCounter.textContent = text;
+    if (footerVisitCounter) footerVisitCounter.textContent = text;
+  };
 
   try {
     const ipRes = await fetch('https://ipapi.co/json/');
@@ -1690,12 +1695,15 @@ async function loadVisitorMap() {
     if (!counterRes.ok) throw new Error(`Counter API unavailable (${counterRes.status})`);
     const counterData = await counterRes.json();
     const countText = `访问次数（Visits）：${counterData.value}`;
-    visitCounter.textContent = countText;
-    footerVisitCounter.textContent = countText;
+    localStorage.setItem('gx_lab_visit_count_zh', String(counterData.value));
+    updateVisitCountText(countText);
   } catch (error) {
-    const errorText = `访问次数加载失败：${error.message}`;
-    visitCounter.textContent = errorText;
-    footerVisitCounter.textContent = errorText;
+    const cachedValue = localStorage.getItem('gx_lab_visit_count_zh');
+    if (cachedValue) {
+      updateVisitCountText(`访问次数（Visits）：${cachedValue}`);
+    } else {
+      updateVisitCountText('访问次数：暂无数据');
+    }
   }
 }
 
