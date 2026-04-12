@@ -1702,7 +1702,10 @@ async function loadVisitorMap() {
     if (cachedValue) {
       updateVisitCountText(`访问次数（Visits）：${cachedValue}`);
     } else {
-      updateVisitCountText('访问次数：暂无数据');
+      const localFallbackKey = 'gx_lab_local_visit_count_zh';
+      const localCount = Number(localStorage.getItem(localFallbackKey) || '0') + 1;
+      localStorage.setItem(localFallbackKey, String(localCount));
+      updateVisitCountText(`访问次数（Visits）：${localCount}`);
     }
   }
 }

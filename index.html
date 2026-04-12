@@ -1704,7 +1704,10 @@ async function loadVisitorMap() {
     if (cachedValue) {
       updateVisitCountText(`Visits: ${cachedValue}`);
     } else {
-      updateVisitCountText('Visits: N/A');
+      const localFallbackKey = 'gx_lab_local_visit_count_en';
+      const localCount = Number(localStorage.getItem(localFallbackKey) || '0') + 1;
+      localStorage.setItem(localFallbackKey, String(localCount));
+      updateVisitCountText(`Visits: ${localCount}`);
     }
   }
 }
