@@ -156,19 +156,60 @@
       "undergraduate_school": "Guangzhou University",
       "photo": "",
       "name_zh": "高繁"
+    },
+    {
+      "year": "2022",
+      "degree": "PhD",
+      "name": "Yuanjie Zheng（郑远杰）",
+      "email": "1363763816@qq.com",
+      "research": "Catalyst design and mechanistic studies for electrocatalytic oxygen reduction to hydrogen peroxide, and downstream application development",
+      "undergraduate_school": "Jinan University",
+      "photo": "",
+      "name_zh": "郑远杰"
+    },
+    {
+      "year": "2022",
+      "degree": "PhD",
+      "name": "Jing Dai（戴晶）",
+      "email": "1713534357@qq.com",
+      "research": "Thermocatalytic degradation of polyolefin plastics",
+      "undergraduate_school": "Hunan University of Arts and Science",
+      "photo": "",
+      "name_zh": "戴晶"
+    },
+    {
+      "year": "2023",
+      "degree": "Master",
+      "name": "Weiwei Zhou（周维玮）",
+      "email": "wwkaty@163.com",
+      "research": "Efficient electrocatalytic biomass conversion",
+      "undergraduate_school": "Dalian Maritime University",
+      "photo": "",
+      "name_zh": "周维玮"
+    },
+    {
+      "year": "2023",
+      "degree": "Master",
+      "name": "Fangzheng Liu（刘方政）",
+      "email": "2452919204@qq.com",
+      "research": "AI-assisted automated platform for designing high-performance catalysts",
+      "undergraduate_school": "Henan University",
+      "photo": "",
+      "name_zh": "刘方政"
+    },
+    {
+      "year": "2023",
+      "degree": "Master",
+      "name": "Peilin Sun（孙沛霖）",
+      "email": "421749383@qq.com",
+      "research": "Electrocatalytic oxygen reduction reaction (ORR)",
+      "undergraduate_school": "Southwest University",
+      "photo": "",
+      "name_zh": "孙沛霖"
     }
   ],
   "Graduate": {
     "2022": [
-      {
-        "degree": "PhD",
-        "name": "Yuanjie Zheng（郑远杰）",
-        "email": "1363763816@qq.com",
-        "research": "Catalyst design and mechanistic studies for electrocatalytic oxygen reduction to hydrogen peroxide, and downstream application development",
-        "undergraduate_school": "Jinan University",
-        "photo": "",
-        "name_zh": "郑远杰"
-      },
       {
         "degree": "PhD",
         "name": "Jin Yang（杨金）",
@@ -177,15 +218,6 @@
         "undergraduate_school": "East China University of Technology",
         "photo": "",
         "name_zh": "杨金"
-      },
-      {
-        "degree": "PhD",
-        "name": "Jing Dai（戴晶）",
-        "email": "1713534357@qq.com",
-        "research": "Thermocatalytic degradation of polyolefin plastics",
-        "undergraduate_school": "Hunan University of Arts and Science",
-        "photo": "",
-        "name_zh": "戴晶"
       }
     ],
     "2023": [
@@ -224,33 +256,6 @@
         "undergraduate_school": "Liaoning Petrochemical University",
         "photo": "",
         "name_zh": "王浩南"
-      },
-      {
-        "degree": "Master",
-        "name": "Weiwei Zhou（周维玮）",
-        "email": "wwkaty@163.com",
-        "research": "Efficient electrocatalytic biomass conversion",
-        "undergraduate_school": "Dalian Maritime University",
-        "photo": "",
-        "name_zh": "周维玮"
-      },
-      {
-        "degree": "Master",
-        "name": "Fangzheng Liu（刘方政）",
-        "email": "2452919204@qq.com",
-        "research": "AI-assisted automated platform for designing high-performance catalysts",
-        "undergraduate_school": "Henan University",
-        "photo": "",
-        "name_zh": "刘方政"
-      },
-      {
-        "degree": "Master",
-        "name": "Peilin Sun（孙沛霖）",
-        "email": "421749383@qq.com",
-        "research": "Electrocatalytic oxygen reduction reaction (ORR)",
-        "undergraduate_school": "Southwest University",
-        "photo": "",
-        "name_zh": "孙沛霖"
       },
       {
         "degree": "Master",
