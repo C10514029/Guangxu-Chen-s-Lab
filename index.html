@@ -1674,7 +1674,7 @@ async function loadPeopleData() {
       (graduateByYear[year] || []).map((m) => ({ ...m, year }))
     );
 
-    const postdocs = alumni.filter((m) => memberZhName(m) === '刘道儒').map((m) => ({ ...m, original_degree: m.degree, degree: 'Postdoc' }));
+    const postdocs = alumni.filter((m) => ['刘道儒', '吴祺祺'].includes(memberZhName(m))).map((m) => ({ ...m, original_degree: m.degree, degree: 'Postdoc' }));
     const alumniFiltered = alumni.filter((m) => memberZhName(m) !== '刘道儒');
     const phd = graduate.filter((m) => m.degree === 'PhD');
     const masters = graduate.filter((m) => m.degree === 'Master');
