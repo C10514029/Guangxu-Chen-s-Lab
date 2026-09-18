@@ -333,6 +333,118 @@
         "photo": "assets/img/people/Master_张智航.jpeg",
         "name_zh": "张智航"
       }
+    ],
+    "2026": [
+      {
+        "name": "Wenxiao Wu（吴文骁）",
+        "name_zh": "吴文骁",
+        "degree": "Master",
+        "research": "AI for science",
+        "undergraduate_school": "Central South University",
+        "email": "736410122@qq.com",
+        "photo": "assets/img/people/2026_Master_吴文骁.jpeg",
+        "research_zh": "人工智能辅助科学研究",
+        "undergraduate_school_zh": "中南大学"
+      },
+      {
+        "name": "Luyao Wang（汪璐瑶）",
+        "name_zh": "汪璐瑶",
+        "degree": "Master",
+        "research": "AI for science",
+        "undergraduate_school": "University of Science and Technology Beijing",
+        "email": "wly_safety2026@163.com",
+        "photo": "assets/img/people/2026_Master_汪璐瑶.jpeg",
+        "research_zh": "人工智能辅助科学研究",
+        "undergraduate_school_zh": "北京科技大学"
+      },
+      {
+        "name": "Yihan Zhou（周艺涵）",
+        "name_zh": "周艺涵",
+        "degree": "Master",
+        "research": "AI for science",
+        "undergraduate_school": "South China University of Technology",
+        "email": "13433316131@163.com",
+        "photo": "assets/img/people/2026_Master_周艺涵.jpeg",
+        "research_zh": "人工智能辅助科学研究",
+        "undergraduate_school_zh": "华南理工大学"
+      },
+      {
+        "name": "Chenxiang Yan（严辰翔）",
+        "name_zh": "严辰翔",
+        "degree": "Master",
+        "research": "Small-molecule oxidation",
+        "undergraduate_school": "Zhengzhou University of Light Industry",
+        "email": "1220860140@qq.com",
+        "photo": "assets/img/people/2026_Master_严辰翔.jpeg",
+        "research_zh": "小分子氧化",
+        "undergraduate_school_zh": "郑州轻工业大学"
+      },
+      {
+        "name": "Jiahao Fang（方佳豪）",
+        "name_zh": "方佳豪",
+        "degree": "Master",
+        "research": "AI for science",
+        "undergraduate_school": "South China Normal University",
+        "email": "3489196454@qq.com",
+        "photo": "assets/img/people/2026_Master_方佳豪.jpeg",
+        "research_zh": "人工智能辅助科学研究",
+        "undergraduate_school_zh": "华南师范大学"
+      },
+      {
+        "name": "Weijia Luo（罗伟家）",
+        "name_zh": "罗伟家",
+        "degree": "Master",
+        "research": "Regeneration and utilization of lithium resources",
+        "undergraduate_school": "Guangzhou University",
+        "email": "1243185230@qq.com",
+        "photo": "assets/img/people/2026_Master_罗伟家.jpeg",
+        "research_zh": "锂资源再生与利用",
+        "undergraduate_school_zh": "广州大学"
+      },
+      {
+        "name": "Tianli He（何天立）",
+        "name_zh": "何天立",
+        "degree": "PhD",
+        "research": "Conversion of small biomass molecules",
+        "undergraduate_school": "Jinan University",
+        "email": "1728876774@qq.com",
+        "photo": "assets/img/people/2026_PhD_何天立.jpeg",
+        "research_zh": "生物质小分子转化",
+        "undergraduate_school_zh": "暨南大学"
+      },
+      {
+        "name": "Xuanyi Chen（陈轩毅）",
+        "name_zh": "陈轩毅",
+        "degree": "PhD",
+        "research": "Electrocatalytic CO2 reduction",
+        "undergraduate_school": "Northwestern Polytechnical University",
+        "email": "202610192651@mail.scut.edu",
+        "photo": "assets/img/people/2026_PhD_陈轩毅.jpeg",
+        "research_zh": "电催化二氧化碳还原",
+        "undergraduate_school_zh": "西北工业大学"
+      },
+      {
+        "name": "Xindi Chen（陈心笛）",
+        "name_zh": "陈心笛",
+        "degree": "PhD",
+        "research": "Catalyst design for electrocatalytic H2O2 production and downstream biomass oxidative upgrading",
+        "undergraduate_school": "Lanzhou University",
+        "email": "chenxd98@alumni.sysu.edu.cn",
+        "photo": "assets/img/people/2026_PhD_陈心笛.jpeg",
+        "research_zh": "电催化合成过氧化氢的催化剂设计及下游生物质氧化升级",
+        "undergraduate_school_zh": "兰州大学"
+      },
+      {
+        "name": "Jiayue Liu（刘嘉玥）",
+        "name_zh": "刘嘉玥",
+        "degree": "PhD",
+        "research": "",
+        "undergraduate_school": "China University of Petroleum (Beijing)",
+        "email": "jiayueliu163@163.com",
+        "photo": "assets/img/people/2026_PhD_刘嘉玥.jpeg",
+        "research_zh": "",
+        "undergraduate_school_zh": "中国石油大学（北京）"
+      }
     ]
   }
 }

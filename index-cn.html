@@ -1601,12 +1601,12 @@ function createPersonCard(member, sectionTitle) {
 
   const research = document.createElement('p');
   research.className = 'person-meta';
-  research.innerHTML = `<strong>研究方向：</strong> ${member.research || '-'}`;
+  research.innerHTML = `<strong>研究方向：</strong> ${member.research_zh || member.research || '-'}`;
   card.appendChild(research);
 
   const school = document.createElement('p');
   school.className = 'person-meta';
-  school.innerHTML = `<strong>本科毕业院校：</strong> ${member.undergraduate_school || '-'}`;
+  school.innerHTML = `<strong>本科毕业院校：</strong> ${member.undergraduate_school_zh || member.undergraduate_school || '-'}`;
   card.appendChild(school);
 
   const email = document.createElement('p');
@@ -1771,3 +1771,4 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 </body>
 </html>
+
