@@ -1664,7 +1664,7 @@ async function loadPeopleData() {
   if (!root) return;
 
   try {
-    const res = await fetch('data/students.json');
+    const res = await fetch('data/students.json?v=20260918');
     if (!res.ok) throw new Error(`Failed to load students data (${res.status})`);
     const data = await res.json();
 
