@@ -155,7 +155,7 @@
   .people-year-label { font-size: 0.86rem; color: var(--text-muted); margin: 6px 0 10px; }
   .people-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 20px; }
   .person-card { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 14px; box-shadow: 0 3px 12px rgba(0,0,0,0.04); }
-  .person-photo { width: min(100%, 240px); aspect-ratio: 1/1; border-radius: 8px; object-fit: cover; object-position: center top; border: 1px solid var(--border); display: block; margin: 0 auto 12px; background: #f2f2f2; }
+  .person-photo { width: min(100%, 240px); aspect-ratio: 1/1; border-radius: 8px; object-fit: contain; padding: 6px; box-sizing: border-box; object-position: center top; border: 1px solid var(--border); display: block; margin: 0 auto 12px; background: #f2f2f2; }
   .person-avatar { width: min(100%, 240px); aspect-ratio: 1/1; border-radius: 8px; background: linear-gradient(135deg, #e8d5a3, var(--crimson-light)); margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; font-family: 'EB Garamond', serif; font-size: 2rem; color: #fff; font-weight: 700; }
   .person-card h4 { font-size: 1rem; font-weight: 700; margin-bottom: 6px; color: #1f1f1f; }
   .person-meta { font-size: 0.82rem; color: #333; line-height: 1.5; margin-bottom: 4px; }
@@ -300,7 +300,7 @@
         <div class="pi-card">
           <img src="assets/img/inline/inline-cc261fed2e46.svg" style="width:100%;max-width:210px;aspect-ratio:1/1;border-radius:12px;object-fit:cover;object-position:center top;display:block;margin:0 auto 16px;">
           <h3>陈光需 教授</h3>
-          <p>教授 / 博士生导师<br>环境与能源学院<br>华南理工大学</p>
+          <p>教授 / 博士生导师<br>能源学院<br>华南理工大学</p>
         </div>
       </div>
     </div>
@@ -316,8 +316,8 @@
 
     <div class="stats-row">
       <div class="stat-box"><div class="num">100+</div><div class="lbl">SCI 论文</div></div>
-      <div class="stat-box"><div class="num">17,000+</div><div class="lbl">总引用（Google Scholar）</div></div>
-      <div class="stat-box"><div class="num">52</div><div class="lbl">H-index</div></div>
+      <div class="stat-box"><div class="num">18,000+</div><div class="lbl">总引用（Google Scholar）</div></div>
+      <div class="stat-box"><div class="num">54</div><div class="lbl">H-index</div></div>
       <div class="stat-box"><div class="num">13</div><div class="lbl">ESI 高被引论文</div></div>
     </div>
 
@@ -325,7 +325,12 @@
       <h3>最新动态</h3>
       <ul class="news-list" id="home-news-list">
         <li><span class="news-date">2026</span><span class="news-text"><span class="badge">奖项</span>陈光需教授与生态环境部南京环境科学研究所、广州智达实验室科技有限公司共同荣获 2026 年中国分析测试协会分析测试科学奖二等奖。</span></li>
-        <li><span class="news-date">2026</span><span class="news-text"><span class="badge">专利</span>发明专利“一种用于生物质升级和塑料降解的电催化剂及其制备方法与应用”获授权（申请号：2023104960894，申请日：2023-05-05）。</span></li>
+        <li><span class="news-date">2026-09-29</span><span class="news-text"><span class="badge">论文</span>课题组新论文“Tunnel-confined and quenching-anchored atomic Cu in transition metal oxides for efficient catalytic oxidation”已在 <em>Chinese Journal of Catalysis</em> 在线发表（<a href="https://doi.org/10.1016/S1872-2067(26)65177-7" target="_blank" rel="noopener noreferrer">10.1016/S1872-2067(26)65177-7</a>）。</span></li>
+        <li><span class="news-date">2026-09-22</span><span class="news-text"><span class="badge">专利</span>发明专利“一种用于生物质转化和塑料降解的电催化剂及其制备方法与应用”获授权（专利号：ZL 202510384957.9；授权公告号：CN 120400889 B）。</span></li>
+        <li><span class="news-date">2026</span><span class="news-text"><span class="badge">论文</span><em>Advanced Functional Materials</em> 发表新论文：<em>Solar-Driven Photothermal Manufacturing of Defect-Rich Oxide Interfaces for Biomass Electrocatalysis</em>（<a href="https://doi.org/10.1002/adfm.77801" target="_blank" rel="noopener noreferrer">10.1002/adfm.77801</a>）。</span></li>
+        <li><span class="news-date">2026-09-04</span><span class="news-text"><span class="badge">专利</span>发明专利“一种利用光热协同策略在金属氧化物中构建缺陷界面的方法及其产品”获授权（专利号：ZL 202511780238.5；授权公告号：CN 121695860 B）。</span></li>
+        <li><span class="news-date">2026</span><span class="news-text"><span class="badge">论文</span><em>Small</em> 发表新论文：<em>Quenching-Derived Pt Clusters on Co<sub>3</sub>O<sub>4</sub>/TiO<sub>2</sub> p-n Heterojunctions Enable Efficient Photothermal Oxidation of VOCs</em>（<a href="https://doi.org/10.1002/smll.75047" target="_blank" rel="noopener noreferrer">10.1002/smll.75047</a>）。</span></li>
+        <li><span class="news-date">2026-07-21</span><span class="news-text"><span class="badge">专利</span>发明专利“一种用于生物质升级和塑料降解的电催化剂及其制备方法与应用”获授权（专利号：ZL 202310496089.4；授权公告号：CN 116716617 B）。</span></li>
         <li><span class="news-date">2026</span><span class="news-text"><span class="badge">论文</span><em>Analytica Chimica Acta</em> 发表新论文：<em>Online monitoring of volatile organic compounds in water by ultra-low-temperature purge-and-trap coupled with gas chromatography-mass spectrometry system</em>（<a href="https://doi.org/10.1016/j.aca.2026.345807" target="_blank" rel="noopener noreferrer">10.1016/j.aca.2026.345807</a>）。</span></li>
         <li><span class="news-date">2026</span><span class="news-text"><span class="badge">论文</span><em>Science Bulletin</em> 发表新论文：<em>Construction of Pt-TiO<sub>x</sub> interfacial sites via Pt-TiO<sub>2</sub> metal-support interaction for efficient catalytic dehydrogenation of methylcyclohexane</em>（<a href="https://doi.org/10.1016/j.scib.2026.05.052" target="_blank" rel="noopener noreferrer">10.1016/j.scib.2026.05.052</a>）。</span></li>
         <li><span class="news-date">2026</span><span class="news-text"><span class="badge">论文</span><em>ACS Nano</em> 发表新论文：<em>Accelerating Multi-Elemental Catalyst Discovery with Interpretable Machine Learning and Automated Experimentation</em>（<a href="https://doi.org/10.1021/acsnano.5c20552" target="_blank" rel="noopener noreferrer">10.1021/acsnano.5c20552</a>）。</span></li>
@@ -359,7 +364,7 @@
           <img src="assets/img/inline/inline-cc261fed2e46.svg" style="width:100%;max-width:260px;aspect-ratio:1/1;border-radius:12px;object-fit:cover;object-position:center center;display:block;margin:0 auto 16px;">
           <h2>陈光需</h2>
           <p style="font-size:0.8rem;color:var(--crimson);font-weight:600;margin:4px 0 8px">教授 / 博士生导师</p>
-          <p>华南理工大学<br>环境与能源学院</p>
+          <p>华南理工大学<br>能源学院</p>
           <p style="margin-top:10px;font-size:0.76rem;color:var(--crimson)">cgx08(at)scut.edu.cn</p>
           <p style="margin-top:10px;font-size:0.76rem;line-height:1.6">
             Google Scholar：<a href="https://scholar.google.com/citations?hl=en&user=AdkuXbQAAAAJ&view_op=list_works&sortby=pubdate" target="_blank" rel="noopener noreferrer">Google Scholar</a><br>
@@ -368,15 +373,15 @@
         </div>
       </div>
       <div class="bio-text">
-        <p>陈光需，华南理工大学环境与能源学院教授、博士生导师，入选 <strong>国家海外高层次青年人才项目（2018）</strong>。本科毕业于安徽大学，博士师从厦门大学郑南峰院士，随后在斯坦福大学崔屹院士课题组开展博士后研究。</p>
+        <p>陈光需，华南理工大学能源学院教授、博士生导师，入选 <strong>国家海外高层次青年人才项目（2018）</strong>。本科毕业于安徽大学，博士师从厦门大学郑南峰院士，随后在斯坦福大学崔屹院士课题组开展博士后研究。</p>
         <p>课题组主要面向双碳目标和环境净化，致力于将基础研究转化为支撑“双碳”战略的产业动能；依托自主构建的全智能机器人实验平台，打通从材料 AI 筛选到工程化系统集成的全链条开发，重点推进电化学生物质增值转化、CO<sub>2</sub> 捕获-转化-利用（CCUS）系统能效优化以及复杂体系电分离工程化装备研制。</p>
         <p>已主持国家海外高层次青年人才项目、科技部重点研发计划课题、国家自然科学基金面上项目、科技部外专项目以及广东省“珠江人才计划”等多项科研任务。</p>
-        <p>已发表 <strong>100 余篇 SCI 论文</strong>，包括 <em>Science</em>、<em>Nature Materials</em>、<em>Nature Catalysis</em>、<em>Nature Water</em>、<em>Nature Communications</em>、<em>JACS</em>、<em>ACS Catalysis</em>、<em>Nano Letters</em>、<em>ACS Nano</em> 等，累计引用超过 <strong>17,000 次</strong>，H-index 为 <strong>52</strong>，ESI 高被引论文 13 篇。</p>
-        <p>曾获 <strong>2018 年度国家自然科学奖二等奖</strong>（项目“金属纳米材料的配位化学”，排名第四）、<strong>2024 年广东省科技成果推广奖</strong>，并与生态环境部南京环境科学研究所、广州智达实验室科技有限公司共同荣获 <strong>2026 年中国分析测试协会分析测试科学奖二等奖</strong>。已申请专利 25 项，其中授权 19 项，另有 2 项 PCT 专利和 2 项成果转化。</p>
+        <p>已发表 <strong>100 余篇 SCI 论文</strong>，包括 <em>Science</em>、<em>Nature Materials</em>、<em>Nature Catalysis</em>、<em>Nature Water</em>、<em>Nature Communications</em>、<em>JACS</em>、<em>ACS Catalysis</em>、<em>Nano Letters</em>、<em>ACS Nano</em> 等，累计引用超过 <strong>18,000 次</strong>，H-index 为 <strong>54</strong>，ESI 高被引论文 13 篇。</p>
+        <p>曾获 <strong>2018 年度国家自然科学奖二等奖</strong>（项目“金属纳米材料的配位化学”，排名第四）、<strong>2024 年广东省科技成果推广奖</strong>，并与生态环境部南京环境科学研究所、广州智达实验室科技有限公司共同荣获 <strong>2026 年中国分析测试协会分析测试科学奖二等奖</strong>。已申请专利 26 项，其中授权 21 项，另有 2 项 PCT 专利和 2 项成果转化。</p>
 
         <div class="exp-section">
           <h3>工作经历</h3>
-          <div class="exp-item"><span class="exp-year">2019/09 – 至今</span><span class="exp-desc">华南理工大学环境与能源学院，教授</span></div>
+          <div class="exp-item"><span class="exp-year">2019/09 – 至今</span><span class="exp-desc">华南理工大学，教授（现属能源学院，曾属环境与能源学院）</span></div>
           <div class="exp-item"><span class="exp-year">2015/09 – 2019/06</span><span class="exp-desc">斯坦福大学材料科学与工程系，博士后（合作导师：崔屹院士）</span></div>
           <div class="exp-item"><span class="exp-year">2014/09 – 2015/09</span><span class="exp-desc">厦门大学能源材料化学协同创新中心，博士后（合作导师：郑南峰院士）</span></div>
         </div>
@@ -389,7 +394,6 @@
     </div>
 
     <div id="people-sections"></div>
-    <p class="people-note">* 学生信息直接展示在本页；各位同学的入学年份已体现在个人卡片中，因此不再按照年份二次分组。</p>
   </div>
 </div>
 
@@ -506,6 +510,24 @@
 
     <div class="pub-year-group" data-year="2026" id="pub-year-2026">
       <div class="pub-year-header">2026</div>
+      <div class="pub-item">
+        <div class="pub-title">Tunnel-confined and quenching-anchored atomic Cu in transition metal oxides for efficient catalytic oxidation <span class="pub-badge">Chin. J. Catal.</span></div>
+        <div class="pub-authors">Yang J., Lin J., Ye C., Li Y., Liu S., Zhang G., Liu S., <strong>Chen G.</strong></div>
+        <div class="pub-journal">Chinese Journal of Catalysis, 2026, 89, 477–490 <a class="pub-link" href="https://doi.org/10.1016/S1872-2067(26)65177-7" target="_blank" rel="noopener noreferrer">DOI →</a></div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">Solar-Driven Photothermal Manufacturing of Defect-Rich Oxide Interfaces for Biomass Electrocatalysis <span class="pub-badge">Adv. Funct. Mater.</span></div>
+        <div class="pub-authors">Zhang G., Yang H., Fang Z., Chen Z., Liu S., Ren X., Huang W.-H., Waterhouse G.I.N., Zhao Y.*, <strong>Chen G.*</strong></div>
+        <div class="pub-journal">Advanced Functional Materials, 2026 <a class="pub-link" href="https://doi.org/10.1002/adfm.77801" target="_blank">DOI →</a></div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">Quenching-Derived Pt Clusters on Co<sub>3</sub>O<sub>4</sub>/TiO<sub>2</sub> p-n Heterojunctions Enable Efficient Photothermal Oxidation of VOCs <span class="pub-badge">Small</span></div>
+        <div class="pub-authors">Yang J.<sup>+</sup>, Li Y.<sup>+,*</sup>, Chong Y., Ye C., Jin X., Liu S., Lin J., Zhong M., Qiu Y., Ye D., <strong>Chen G.*</strong></div>
+        <div class="pub-journal">Small, 2026 <a class="pub-link" href="https://doi.org/10.1002/smll.75047" target="_blank">DOI →</a></div>
+      </div>
+
       <div class="pub-item">
         <div class="pub-title">Online monitoring of volatile organic compounds in water by ultra-low-temperature purge-and-trap coupled with gas chromatography-mass spectrometry system <span class="pub-badge">Analytica Chimica Acta</span></div>
         <div class="pub-authors">Wu M., Qiu W., Su Y., Zhao W.-W., Song N.*, Hu B.*, <strong>Chen G.*</strong></div>
@@ -1218,8 +1240,8 @@
     <div id="pub-panel-patents" class="pub-panel">
       <p style="font-size:0.84rem;color:var(--text-muted);margin-bottom:22px">以下内容用于概览课题组的知识产权布局，便于与论文成果一并浏览。</p>
       <div class="patent-stat-row">
-        <div class="patent-stat"><strong>25</strong><span>专利申请</span></div>
-        <div class="patent-stat"><strong>19</strong><span>已授权专利</span></div>
+        <div class="patent-stat"><strong>26</strong><span>专利申请</span></div>
+        <div class="patent-stat"><strong>21</strong><span>已授权专利</span></div>
         <div class="patent-stat"><strong>2</strong><span>PCT 申请</span></div>
         <div class="patent-stat"><strong>2</strong><span>成果转化</span></div>
       </div>
@@ -1246,30 +1268,32 @@
         </div>
         <div class="patent-card" style="grid-column: 1 / -1; border-left-color: var(--gold);">
           <h3>最新授权发明专利</h3>
-          <p><strong>陈光需；裴安；李正健；丘勇才；严克友</strong>；一种用于生物质升级和塑料降解的电催化剂及其制备方法与应用，已授权发明专利，申请号 2023104960894（申请日：2023-05-05）。</p>
+          <p><strong>陈光需；裴安；周维玮；江逍逸；张俊睿</strong>；一种用于生物质转化和塑料降解的电催化剂及其制备方法与应用，发明专利，2025103849579。</p>
         </div>
         <div class="patent-card patent-list-card" style="grid-column: 1 / -1;">
           <h3>专利清单（部分）</h3>
-          <p>以下列出目前已整理到网站中的 18 项代表性专利 / 申请，其中“一种用于生物质升级和塑料降解的电催化剂及其制备方法与应用”已获授权。</p>
+          <p>以下列出目前已整理到网站中的 20 项代表性专利 / 申请，其中“一种用于生物质转化和塑料降解的电催化剂及其制备方法与应用”为最新授权发明专利（授权公告日：2026-09-22）。</p>
           <ol class="patent-list">
-            <li><strong>陈光需；吴祺祺；杜瑞安；王鹏；李正健；丘勇才；严克友</strong>；一种共轭导电聚合物改性铜基催化剂及其制备方法与应用，发明专利，2021115356288。</li>
-            <li><strong>丘勇才；邬鹏；陈光需；严克友</strong>；一种光-热催化空气净化装置，发明专利，2020104815810。</li>
-            <li><strong>吴曼曼；陈光需；刘淑敏</strong>；一种用于吹扫捕集中高效消泡装置及方法，发明专利，2023105286409。</li>
-            <li><strong>陈光需；赵伟伟；杜瑞安；李正健；宾宇良</strong>；一种 CuO 纳米片及其自上而下的制备方法与应用，发明专利，2019111558601。</li>
-            <li><strong>吴曼曼；陈光需；刘淑敏</strong>；一种在线多基质内 VOCs 分析装置及方法，发明专利，2022111086886。</li>
-            <li><strong>陈光需；陈阳东；杜瑞安；郑远杰；吴祺祺</strong>；一种燃料电池气体扩散层及其制备方法与应用，发明专利，2023103750827。</li>
-            <li><strong>陈光需；古雯蕾；梁程；李正健；丘勇才；严克友</strong>；一种负载型功能金属纳米团簇的低温冷冻光化学制备方法及得到的产品与应用，发明专利，2022109955648。</li>
-            <li><strong>陈光需；裴安；李正健；丘勇才；严克友</strong>；一种用于生物质升级和塑料降解的电催化剂及其制备方法与应用，PCT 或外国申请，PCT/CN2023/095893。</li>
-            <li><strong>陈光需；郑远杰</strong>；一种含有 3d 金属单原子和氮、氧共掺杂的碳材料的制备方法与应用，发明专利，2021113490526。</li>
-            <li><strong>陈光需；裴安；李正健；丘勇才；严克友</strong>；一种用于生物质升级和塑料降解的电催化剂及其制备方法与应用，已授权发明专利，申请号 2023104960894（申请日：2023-05-05）。</li>
-            <li><strong>陈光需；杜瑞安；吴祺祺；王鹏；李正健；丘勇才；严克友</strong>；用于大电流二氧化碳电催化产乙烯的石墨烯量子点负载 CuO 催化剂及其制备方法与应用，发明专利，2023103073272。</li>
-            <li><strong>陈光需；吴祺祺；杜瑞安；王鹏；李正健；丘勇才；严克友</strong>；一种富含 Cu0/Cu+ 界面活性位点的铜基催化剂及其制备方法与应用，发明专利，2023101582935。</li>
-            <li><strong>陈光需；张改草；陈兆熙；赵文静；汪晓雪</strong>；一种草酸循环与氢氧化锂联产的废旧锂电正极材料回收方法，发明专利，202511663992.0。</li>
-            <li><strong>陈光需；刘人凤；裴安；严克友</strong>；用于低电位产苯甲酸的富含 PtZn-ZnOx 界面活性位点的催化剂及其制备方法与应用，发明专利，202411994785.9。</li>
+            <li><strong>陈光需；裴安；周维玮；江逍逸；张俊睿</strong>；一种用于生物质转化和塑料降解的电催化剂及其制备方法与应用，发明专利，2025103849579。</li>
+            <li><strong>陈光需；张改革；陈兆熙；任笑潮；刘淑敏；杨金</strong>；一种利用光热协同策略在金属氧化物中构建缺陷界面的方法及其产品，发明专利，2025117802385。</li>
+            <li><strong>陈光需；张改革；陈兆熙；赵文静；汪晓雪</strong>；一种草酸循环与氢氧化锂联产的废旧锂电正极材料回收方法，发明专利，202511663992.0。</li>
             <li><strong>陈光需；刘淑敏；裴安；周维玮；江逍逸</strong>；一种多元金属界面结构纳米催化剂 NM1NM2/C 及其制备方法与应用，发明专利，202510516554.5。</li>
+            <li><strong>陈光需；刘人凤；裴安；严克友</strong>；用于低电位产苯甲酸的富含 PtZn-ZnOx 界面活性位点的催化剂及其制备方法与应用，发明专利，202411994785.9。</li>
             <li><strong>陈光需；王鹏；裴安；陈兆熙</strong>；用于碱性电化学合成中的电解质回收、产品分离和 CO₂ 捕获集成系统及其制备方法，发明专利，202411185786.9。</li>
             <li><strong>胡韩；胡泽凯；罗卓辉；蔡嘉标；陈欣婷；李存金；黄玉生；张礼松；陈光需</strong>；电镜样品制备系统及控制方法，发明专利，202410219362.3。</li>
+            <li><strong>吴曼曼；陈光需；刘淑敏</strong>；一种用于吹扫捕集中高效消泡装置及方法，发明专利，2023105286409。</li>
+            <li><strong>陈光需；陈阳东；杜瑞安；郑远杰；吴祺祺</strong>；一种燃料电池气体扩散层及其制备方法与应用，发明专利，2023103750827。</li>
+            <li><strong>陈光需；裴安；李正健；丘勇才；严克友</strong>；一种用于生物质升级和塑料降解的电催化剂及其制备方法与应用，PCT 或外国申请，PCT/CN2023/095893。</li>
+            <li><strong>陈光需；裴安；李正健；丘勇才；严克友</strong>；一种用于生物质升级和塑料降解的电催化剂及其制备方法与应用，发明专利，2023104960894。</li>
+            <li><strong>陈光需；杜瑞安；吴祺祺；王鹏；李正健；丘勇才；严克友</strong>；用于大电流二氧化碳电催化产乙烯的石墨烯量子点负载 CuO 催化剂及其制备方法与应用，发明专利，2023103073272。</li>
+            <li><strong>陈光需；吴祺祺；杜瑞安；王鹏；李正健；丘勇才；严克友</strong>；一种富含 Cu0/Cu+ 界面活性位点的铜基催化剂及其制备方法与应用，发明专利，2023101582935。</li>
             <li><strong>柳泽明；李宏强；陈光需；高繁</strong>；一种基于强化学习的金纳米棒 AuNRs 合成方法、系统，发明专利，202310426195.5。</li>
+            <li><strong>吴曼曼；陈光需；刘淑敏</strong>；一种在线多基质内 VOCs 分析装置及方法，发明专利，2022111086886。</li>
+            <li><strong>陈光需；古雯蕾；梁程；李正健；丘勇才；严克友</strong>；一种负载型功能金属纳米团簇的低温冷冻光化学制备方法及得到的产品与应用，发明专利，2022109955648。</li>
+            <li><strong>陈光需；吴祺祺；杜瑞安；王鹏；李正健；丘勇才；严克友</strong>；一种共轭导电聚合物改性铜基催化剂及其制备方法与应用，发明专利，2021115356288。</li>
+            <li><strong>陈光需；郑远杰</strong>；一种含有 3d 金属单原子和氮、氧共掺杂的碳材料的制备方法与应用，发明专利，2021113490526。</li>
+            <li><strong>丘勇才；邬鹏；陈光需；严克友</strong>；一种光-热催化空气净化装置，发明专利，2020104815810。</li>
+            <li><strong>陈光需；赵伟伟；杜瑞安；李正健；宾宇良</strong>；一种 CuO 纳米片及其自上而下的制备方法与应用，发明专利，2019111558601。</li>
           </ol>
         </div>
       </div>
@@ -1374,7 +1398,7 @@
         <h3>联系课题组</h3>
         <div class="contact-row">
           <span class="contact-icon">👤</span>
-          <div><p><strong>陈光需</strong><br>教授 / 博士生导师<br>华南理工大学<br>环境与能源学院</p></div>
+          <div><p><strong>陈光需</strong><br>教授 / 博士生导师<br>华南理工大学<br>能源学院</p></div>
         </div>
         <div class="contact-row">
           <span class="contact-icon">✉️</span>
@@ -1407,7 +1431,7 @@
 </div>
 
 <footer>
-  <strong>陈光需课题组</strong> · 华南理工大学环境与能源学院<br>
+  <strong>陈光需课题组</strong> · 华南理工大学能源学院<br>
   <span style="font-size:0.72rem;margin-top:4px;display:block">广州市番禺区广州大学城外环东路382号 · 510006 · cgx08(at)scut.edu.cn</span>
   <div id="footer-visit-counter" class="footer-visit-count">访问次数：加载中...</div>
 </footer>
@@ -1509,19 +1533,11 @@ function memberPhotoPosition(member) {
 }
 
 function memberPhotoStyle(member) {
-  const zhName = memberZhName(member);
-  const smallerPhotoNames = new Set(['吴祺祺', '种亚楠', '高繁', '杨华岳', '刘淑敏']);
-  if (smallerPhotoNames.has(zhName)) {
-    return {
-      fit: 'contain',
-      padding: '6px',
-      background: '#f5f5f5'
-    };
-  }
+  // Keep the full portrait visible, including hair, inside the square frame.
   return {
-    fit: 'cover',
-    padding: '0',
-    background: '#f2f2f2'
+    fit: 'contain',
+    padding: '6px',
+    background: '#f5f5f5'
   };
 }
 
@@ -1586,12 +1602,12 @@ function createPersonCard(member, sectionTitle) {
 
   const research = document.createElement('p');
   research.className = 'person-meta';
-  research.innerHTML = `<strong>研究方向：</strong> ${member.research || '-'}`;
+  research.innerHTML = `<strong>研究方向：</strong> ${member.research_zh || member.research || '-'}`;
   card.appendChild(research);
 
   const school = document.createElement('p');
   school.className = 'person-meta';
-  school.innerHTML = `<strong>本科毕业院校：</strong> ${member.undergraduate_school || '-'}`;
+  school.innerHTML = `<strong>本科毕业院校：</strong> ${member.undergraduate_school_zh || member.undergraduate_school || '-'}`;
   card.appendChild(school);
 
   const email = document.createElement('p');
@@ -1647,7 +1663,7 @@ async function loadPeopleData() {
   if (!root) return;
 
   try {
-    const res = await fetch('data/students.json');
+    const res = await fetch('data/students.json?v=20260918');
     if (!res.ok) throw new Error(`Failed to load students data (${res.status})`);
     const data = await res.json();
 
@@ -1657,7 +1673,7 @@ async function loadPeopleData() {
       (graduateByYear[year] || []).map((m) => ({ ...m, year }))
     );
 
-    const postdocs = alumni.filter((m) => memberZhName(m) === '刘道儒').map((m) => ({ ...m, original_degree: m.degree, degree: 'Postdoc' }));
+    const postdocs = alumni.filter((m) => ['刘道儒', '吴祺祺'].includes(memberZhName(m))).map((m) => ({ ...m, original_degree: m.degree, degree: 'Postdoc' }));
     const alumniFiltered = alumni.filter((m) => memberZhName(m) !== '刘道儒');
     const phd = graduate.filter((m) => m.degree === 'PhD');
     const masters = graduate.filter((m) => m.degree === 'Master');
@@ -1756,3 +1772,4 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 </body>
 </html>
+

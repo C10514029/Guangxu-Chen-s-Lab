@@ -156,19 +156,60 @@
       "undergraduate_school": "Guangzhou University",
       "photo": "",
       "name_zh": "高繁"
+    },
+    {
+      "year": "2022",
+      "degree": "PhD",
+      "name": "Yuanjie Zheng（郑远杰）",
+      "email": "1363763816@qq.com",
+      "research": "Catalyst design and mechanistic studies for electrocatalytic oxygen reduction to hydrogen peroxide, and downstream application development",
+      "undergraduate_school": "Jinan University",
+      "photo": "",
+      "name_zh": "郑远杰"
+    },
+    {
+      "year": "2022",
+      "degree": "PhD",
+      "name": "Jing Dai（戴晶）",
+      "email": "1713534357@qq.com",
+      "research": "Thermocatalytic degradation of polyolefin plastics",
+      "undergraduate_school": "Hunan University of Arts and Science",
+      "photo": "",
+      "name_zh": "戴晶"
+    },
+    {
+      "year": "2023",
+      "degree": "Master",
+      "name": "Weiwei Zhou（周维玮）",
+      "email": "wwkaty@163.com",
+      "research": "Efficient electrocatalytic biomass conversion",
+      "undergraduate_school": "Dalian Maritime University",
+      "photo": "",
+      "name_zh": "周维玮"
+    },
+    {
+      "year": "2023",
+      "degree": "Master",
+      "name": "Fangzheng Liu（刘方政）",
+      "email": "2452919204@qq.com",
+      "research": "AI-assisted automated platform for designing high-performance catalysts",
+      "undergraduate_school": "Henan University",
+      "photo": "",
+      "name_zh": "刘方政"
+    },
+    {
+      "year": "2023",
+      "degree": "Master",
+      "name": "Peilin Sun（孙沛霖）",
+      "email": "421749383@qq.com",
+      "research": "Electrocatalytic oxygen reduction reaction (ORR)",
+      "undergraduate_school": "Southwest University",
+      "photo": "",
+      "name_zh": "孙沛霖"
     }
   ],
   "Graduate": {
     "2022": [
-      {
-        "degree": "PhD",
-        "name": "Yuanjie Zheng（郑远杰）",
-        "email": "1363763816@qq.com",
-        "research": "Catalyst design and mechanistic studies for electrocatalytic oxygen reduction to hydrogen peroxide, and downstream application development",
-        "undergraduate_school": "Jinan University",
-        "photo": "",
-        "name_zh": "郑远杰"
-      },
       {
         "degree": "PhD",
         "name": "Jin Yang（杨金）",
@@ -177,15 +218,6 @@
         "undergraduate_school": "East China University of Technology",
         "photo": "",
         "name_zh": "杨金"
-      },
-      {
-        "degree": "PhD",
-        "name": "Jing Dai（戴晶）",
-        "email": "1713534357@qq.com",
-        "research": "Thermocatalytic degradation of polyolefin plastics",
-        "undergraduate_school": "Hunan University of Arts and Science",
-        "photo": "",
-        "name_zh": "戴晶"
       }
     ],
     "2023": [
@@ -224,33 +256,6 @@
         "undergraduate_school": "Liaoning Petrochemical University",
         "photo": "",
         "name_zh": "王浩南"
-      },
-      {
-        "degree": "Master",
-        "name": "Weiwei Zhou（周维玮）",
-        "email": "wwkaty@163.com",
-        "research": "Efficient electrocatalytic biomass conversion",
-        "undergraduate_school": "Dalian Maritime University",
-        "photo": "",
-        "name_zh": "周维玮"
-      },
-      {
-        "degree": "Master",
-        "name": "Fangzheng Liu（刘方政）",
-        "email": "2452919204@qq.com",
-        "research": "AI-assisted automated platform for designing high-performance catalysts",
-        "undergraduate_school": "Henan University",
-        "photo": "",
-        "name_zh": "刘方政"
-      },
-      {
-        "degree": "Master",
-        "name": "Peilin Sun（孙沛霖）",
-        "email": "421749383@qq.com",
-        "research": "Electrocatalytic oxygen reduction reaction (ORR)",
-        "undergraduate_school": "Southwest University",
-        "photo": "",
-        "name_zh": "孙沛霖"
       },
       {
         "degree": "Master",
@@ -327,6 +332,118 @@
         "undergraduate_school": "China University of Mining and Technology",
         "photo": "assets/img/people/Master_张智航.jpeg",
         "name_zh": "张智航"
+      }
+    ],
+    "2026": [
+      {
+        "name": "Wenxiao Wu（吴文骁）",
+        "name_zh": "吴文骁",
+        "degree": "Master",
+        "research": "AI for science",
+        "undergraduate_school": "Central South University",
+        "email": "736410122@qq.com",
+        "photo": "assets/img/people/2026_Master_吴文骁.jpeg",
+        "research_zh": "人工智能辅助科学研究",
+        "undergraduate_school_zh": "中南大学"
+      },
+      {
+        "name": "Luyao Wang（汪璐瑶）",
+        "name_zh": "汪璐瑶",
+        "degree": "Master",
+        "research": "AI for science",
+        "undergraduate_school": "University of Science and Technology Beijing",
+        "email": "wly_safety2026@163.com",
+        "photo": "assets/img/people/2026_Master_汪璐瑶.jpeg",
+        "research_zh": "人工智能辅助科学研究",
+        "undergraduate_school_zh": "北京科技大学"
+      },
+      {
+        "name": "Yihan Zhou（周艺涵）",
+        "name_zh": "周艺涵",
+        "degree": "Master",
+        "research": "AI for science",
+        "undergraduate_school": "South China University of Technology",
+        "email": "13433316131@163.com",
+        "photo": "assets/img/people/2026_Master_周艺涵.jpeg",
+        "research_zh": "人工智能辅助科学研究",
+        "undergraduate_school_zh": "华南理工大学"
+      },
+      {
+        "name": "Chenxiang Yan（严辰翔）",
+        "name_zh": "严辰翔",
+        "degree": "Master",
+        "research": "Small-molecule oxidation",
+        "undergraduate_school": "Zhengzhou University of Light Industry",
+        "email": "1220860140@qq.com",
+        "photo": "assets/img/people/2026_Master_严辰翔.jpeg",
+        "research_zh": "小分子氧化",
+        "undergraduate_school_zh": "郑州轻工业大学"
+      },
+      {
+        "name": "Jiahao Fang（方佳豪）",
+        "name_zh": "方佳豪",
+        "degree": "Master",
+        "research": "AI for science",
+        "undergraduate_school": "South China Normal University",
+        "email": "3489196454@qq.com",
+        "photo": "assets/img/people/2026_Master_方佳豪.jpeg",
+        "research_zh": "人工智能辅助科学研究",
+        "undergraduate_school_zh": "华南师范大学"
+      },
+      {
+        "name": "Weijia Luo（罗伟家）",
+        "name_zh": "罗伟家",
+        "degree": "Master",
+        "research": "Regeneration and utilization of lithium resources",
+        "undergraduate_school": "Guangzhou University",
+        "email": "1243185230@qq.com",
+        "photo": "assets/img/people/2026_Master_罗伟家.jpeg",
+        "research_zh": "锂资源再生与利用",
+        "undergraduate_school_zh": "广州大学"
+      },
+      {
+        "name": "Tianli He（何天立）",
+        "name_zh": "何天立",
+        "degree": "PhD",
+        "research": "Conversion of small biomass molecules",
+        "undergraduate_school": "Jinan University",
+        "email": "1728876774@qq.com",
+        "photo": "assets/img/people/2026_PhD_何天立.jpeg",
+        "research_zh": "生物质小分子转化",
+        "undergraduate_school_zh": "暨南大学"
+      },
+      {
+        "name": "Xuanyi Chen（陈轩毅）",
+        "name_zh": "陈轩毅",
+        "degree": "PhD",
+        "research": "Electrocatalytic CO2 reduction",
+        "undergraduate_school": "Northwestern Polytechnical University",
+        "email": "202610192651@mail.scut.edu",
+        "photo": "assets/img/people/2026_PhD_陈轩毅.jpeg",
+        "research_zh": "电催化二氧化碳还原",
+        "undergraduate_school_zh": "西北工业大学"
+      },
+      {
+        "name": "Xindi Chen（陈心笛）",
+        "name_zh": "陈心笛",
+        "degree": "PhD",
+        "research": "Catalyst design for electrocatalytic H2O2 production and downstream biomass oxidative upgrading",
+        "undergraduate_school": "Lanzhou University",
+        "email": "chenxd98@alumni.sysu.edu.cn",
+        "photo": "assets/img/people/2026_PhD_陈心笛.jpeg",
+        "research_zh": "电催化合成过氧化氢的催化剂设计及下游生物质氧化升级",
+        "undergraduate_school_zh": "兰州大学"
+      },
+      {
+        "name": "Jiayue Liu（刘嘉玥）",
+        "name_zh": "刘嘉玥",
+        "degree": "PhD",
+        "research": "",
+        "undergraduate_school": "China University of Petroleum (Beijing)",
+        "email": "jiayueliu163@163.com",
+        "photo": "assets/img/people/2026_PhD_刘嘉玥.jpeg",
+        "research_zh": "",
+        "undergraduate_school_zh": "中国石油大学（北京）"
       }
     ]
   }
