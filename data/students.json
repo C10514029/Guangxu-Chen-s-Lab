@@ -206,6 +206,28 @@
       "undergraduate_school": "Southwest University",
       "photo": "",
       "name_zh": "孙沛霖"
+    },
+    {
+      "year": "2025",
+      "degree": "Master",
+      "name": "Tuo Wu（吴拓）",
+      "email": "b269776918@gmail.com",
+      "research": "PET plastic degradation product recycling and utilization",
+      "undergraduate_school": "Central South University",
+      "photo": "assets/img/people/Master_吴拓.jpeg",
+      "name_zh": "吴拓"
+    },
+    {
+      "year": "2026",
+      "name": "Chenxiang Yan（严辰翔）",
+      "name_zh": "严辰翔",
+      "degree": "Master",
+      "research": "Small-molecule oxidation",
+      "undergraduate_school": "Zhengzhou University of Light Industry",
+      "email": "1220860140@qq.com",
+      "photo": "assets/img/people/2026_Master_严辰翔.jpeg",
+      "research_zh": "小分子氧化",
+      "undergraduate_school_zh": "郑州轻工业大学"
     }
   ],
   "Graduate": {
@@ -299,15 +321,6 @@
       },
       {
         "degree": "Master",
-        "name": "Tuo Wu（吴拓）",
-        "email": "b269776918@gmail.com",
-        "research": "PET plastic degradation product recycling and utilization",
-        "undergraduate_school": "Central South University",
-        "photo": "assets/img/people/Master_吴拓.jpeg",
-        "name_zh": "吴拓"
-      },
-      {
-        "degree": "Master",
         "name": "Yulu Liu（刘雨露）",
         "email": "2389519292@qq.com",
         "research": "Carbon dioxide capture",
@@ -367,17 +380,6 @@
         "photo": "assets/img/people/2026_Master_周艺涵.jpeg",
         "research_zh": "人工智能辅助科学研究",
         "undergraduate_school_zh": "华南理工大学"
-      },
-      {
-        "name": "Chenxiang Yan（严辰翔）",
-        "name_zh": "严辰翔",
-        "degree": "Master",
-        "research": "Small-molecule oxidation",
-        "undergraduate_school": "Zhengzhou University of Light Industry",
-        "email": "1220860140@qq.com",
-        "photo": "assets/img/people/2026_Master_严辰翔.jpeg",
-        "research_zh": "小分子氧化",
-        "undergraduate_school_zh": "郑州轻工业大学"
       },
       {
         "name": "Jiahao Fang（方佳豪）",
